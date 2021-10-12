@@ -30,13 +30,13 @@ router.post(
         if(!patient){
             return res.
             status(400).
-            json[{msg : 'No such user exists'}];
+            json({error : [{msg : 'No such user exists'}]});
         }
         //check password is correct or not
         if(!(passwd==patient.Password)){
             return res.
             status(400).
-            json[{msg : 'Wrong password'}];
+            json({error : {msg : 'Wrong password'}});
         }
         const payload = {
             patient: {
