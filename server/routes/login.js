@@ -24,6 +24,7 @@ router.post(
     try {
       const email = req.body.Email;
       const passwd = req.body.Password;
+      console.log(email, passwd);
       //check user exists or not
       let patient = await Patient.findOne({ Email: email });
       if (!patient) {
@@ -32,7 +33,12 @@ router.post(
           .json({ error: [{ msg: 'No such user exists' }] });
       }
       //check password is correct or not
-      if (!(passwd == patient.Password)) {
+
+      let passwdCheck = await bcrypt.compare(
+        req.body.Password,
+        patient.Password
+      );
+      if (!passwdCheck) {
         return res.status(400).json({ error: { msg: 'Wrong password' } });
       }
       const payload = {
