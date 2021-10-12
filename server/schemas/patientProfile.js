@@ -1,53 +1,42 @@
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
-  Address: 
-  {
+  Address: {
     type: String,
     required: true,
   },
-  Gender: 
-  {
+  Gender: {
     type: String,
-    required: true
-  },
-  PatientHistory: 
-  [
-  {
-    Prescription:
-    [
-    {
-    Timings: 
-    {
-    type: Date,
     required: true,
-    },
-    MedicineDetails: 
+  },
+  PatientHistory: [
     {
-     type: String,
-     required: true,
-    },
-
-    }
-    ],
-    LabReport:
-    [
-    {
-        Timings:
+      Prescription: [
         {
+          Timings: {
             type: Date,
             required: true,
+          },
+          MedicineDetails: {
+            type: String,
+            required: true,
+          },
         },
-        LabResult:
+      ],
+      LabReport: [
         {
-           type: String,
-           required: true,
+          Timings: {
+            type: Date,
+            required: true,
+          },
+          LabResult: {
+            type: String,
+            required: true,
+          },
         },
-
-    }
-    ] 
-  }
-], 
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model('patientProfile', UserSchema);

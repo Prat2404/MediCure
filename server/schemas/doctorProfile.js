@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
-  Address:
-  {
+  Address: {
     type: String,
     required: true,
   },
-  Gender:
-   {
+  Gender: {
     type: String,
     required: true,
-   },
+  },
 });
 
 module.exports = mongoose.model('doctorProfile', UserSchema);

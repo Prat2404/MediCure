@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './App.css';
-
-const App = () => {
-  <Fragment>
-    <h1>App</h1>
-  </Fragment>;
-};
+import Header from './components/header';
+function App() {
+  return <Header />;
+}
 
 export default App;

@@ -14,23 +14,22 @@ const UserSchema = mongoose.Schema({
     required: true,
   },
   Recipt: {
-      type: String,
-      required: true,
+    type: String,
+    required: true,
   },
   AppoinmentMode: {
-      type: String,
-      required: true,
-      //choice physical or online 
+    type: String,
+    required: true,
+    //choice physical or online
   },
-  Symptoms:{
-      type: String,
-      required: true,
+  Symptoms: {
+    type: String,
+    required: true,
   },
   PastHistoryOfMedical: {
-   type: String,
-   required: true,
+    type: String,
+    required: true,
   },
-
 });
 
 module.exports = mongoose.model('appoinment', UserSchema);
