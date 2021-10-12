@@ -10,52 +10,45 @@ const jwtSecret = require('../config/keys').jwtSecret;
 // @desc   Test route
 // @access Public
 router.post(
-    '/',
-    [
-        check('Email', 'Email required').not().isEmpty(),
-        check('Password', 'Password required'),
-    ],
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          return res.status(400).json({ errors: errors.array() });
-        }
-    
-  
-    try{
-        const email=req.body.Email;
-        const passwd=req.body.Password;
-        //check user exists or not
-        let patient = await Patient.findOne({ Email: email });
-        if(!patient){
-            return res.
-            status(400).
-            json[{msg : 'No such user exists'}];
-        }
-        //check password is correct or not
-        if(!(passwd==patient.Password)){
-            return res.
-            status(400).
-            json[{msg : 'Wrong password'}];
-        }
-        const payload = {
-            patient: {
-              id: patient.id,
-            },
-          };
-          jwt.sign(payload, jwtSecret, { expiresIn: 36000 }, (err, token) => {
-            if (err) {
-              throw err;
-            }
-            res.json({ token });
-          });
-         
-    } catch(error){
-        console.log(error.message);
-        return res.status(500).send('(Server) User login  error');
+  '/',
+  [
+    check('Email', 'Email required').not().isEmpty(),
+    check('Password', 'Password required'),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
+    try {
+      const email = req.body.Email;
+      const passwd = req.body.Password;
+      //check user exists or not
+      let patient = await Patient.findOne({ Email: email });
+      if (!patient) {
+        return res.status(400).json[{ msg: 'No such user exists' }];
+      }
+      //check password is correct or not
+      if (!(passwd == patient.Password)) {
+        return res.status(400).json[{ msg: 'Wrong password' }];
+      }
+      const payload = {
+        patient: {
+          id: patient.id,
+        },
+      };
+      jwt.sign(payload, jwtSecret, { expiresIn: 36000 }, (err, token) => {
+        if (err) {
+          throw err;
+        }
+        res.json({ token });
+      });
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).send('(Server) User login  error');
     }
-    }
-    );
+  }
+);
 
 module.exports = router;
