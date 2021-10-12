@@ -10,7 +10,7 @@ const UserSchema = mongoose.Schema({
     required: true,
   },
   TimeSlot: {
-    type: String,
+    type: Date,
     required: true,
   },
   Recipt: {
