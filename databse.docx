@@ -1,0 +1,30 @@
+patientUser:
+    Name, Email,Passwd,
+doctorUser:
+    Name, Email,Passwd,
+patientProfile:
+    Adress, Gender, History, 
+    PatientHistory:
+        {
+            [{ Presciptions : { Date, Presciptions }, LabReports: {Date,  LabReports} }]
+        }
+doctorProfile:
+    Address,Gender
+appointment:
+    patientId:
+    doctorId:
+    TimeSlot:
+    Recipt:
+    Mode: Online/Offline
+    Symptons:
+    PastHistory:
+notes:
+    doctorId:
+    {
+      [{  patientId: [ {Date : Note}] } ]
+    }
+
+pathology:
+
+chat(window):
+    
