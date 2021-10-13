@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 const Nabar = ({ isAuthenticated }) => {
   const logout = (e) => {
     e.preventDefault();
-
     localStorage.removeItem('token');
   };
 
