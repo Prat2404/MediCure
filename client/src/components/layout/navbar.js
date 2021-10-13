@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom'
 const Nabar = ({ isAuthenticated }) => {
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem('token');
+    return <Redirect to="/login" />;
   };
-
   if (localStorage.token) {
     return (
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>

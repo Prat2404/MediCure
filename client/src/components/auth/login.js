@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import Auth from "../utils/Auth";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -12,33 +13,23 @@ const Login = () => {
     // console.log(name,email,password1,password2);
   };
   const { email, password } = formData;
-
+ //var handleAjaxResponse;
+//  handleAjaxResponse = (data) => {
+//   console.log(data);
+// }
   const doLogin = async (e) => {
     e.preventDefault();
-
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-
-    axios
-      .post(
-        'http://localhost:5000/login',
-        {
-          Email: email,
-          Password: password,
-        },
-        { headers }
-      )
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('token', res.data.token);
-      })
-      .catch((error) => {
-        console.log('Error ========>', error.response.data);
-      });
+    var mess= Auth.login(
+      email,
+      password,
+    );
+    if (Auth.loggedIn()) {
+      return <Redirect to={"/home"} />;
+    }
   };
-  if (localStorage.token) {
-    return <Redirect to='/home' />;
+  console.log(Auth.loggedIn());
+  if (Auth.loggedIn()) {
+    return <Redirect to={"/home"} />;
   }
   return (
     <Fragment>
