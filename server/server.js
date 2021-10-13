@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 
 const login = require('./routes/login');
 const register = require('./routes/register');
@@ -10,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 //Init middleware
 app.use(express.json());
-
+app.use(cors());
 // DB Config
 const db = require('./config/keys').mongoURI;
 
