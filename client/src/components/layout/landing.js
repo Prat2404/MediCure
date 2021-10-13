@@ -1,7 +1,18 @@
-import React from 'react';
-
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 const Landing = () => {
-  return <div>Hello Landing</div>;
+  return (
+    <Fragment>
+      <div className='lading'>
+        <Link to='/'>
+          <button>Patient</button>
+        </Link>
+        <Link to='/doctor'>
+          <button>Doctor</button>
+        </Link>
+      </div>
+    </Fragment>
+  );
 };
 
 export default Landing;

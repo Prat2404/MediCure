@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 function Register() {
   const [formData, setFormData] = useState({
     name: '',
@@ -35,11 +36,13 @@ function Register() {
         )
         .then((res) => console.log(res))
         .catch((error) => {
-          console.log('Error ========>', error);
+          console.log('Error ========>', error.response.data);
         });
     }
   };
-
+  if (localStorage.token) {
+    return <Redirect to='/home' />;
+  }
   return (
     <Fragment>
       <form className='form-horizontal' onSubmit={doRegister}>

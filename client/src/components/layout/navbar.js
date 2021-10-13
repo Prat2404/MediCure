@@ -1,11 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const Nabar = () => {
+const Nabar = ({ isAuthenticated }) => {
+  const logout = (e) => {
+    e.preventDefault();
+
+    localStorage.removeItem('token');
+  };
+
+  if (localStorage.token) {
+    return (
+      <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+        <Link className='navbar-brand' to='/'>
+          Medicure
+        </Link>
+
+        <ul className='navbar-nav ml-auto'>
+          <li className='nav-item'>
+            <Link className='nav-link' to='/' onClick={logout}>
+              Logout
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <a className='navbar-brand' href='#'>
+      <Link className='navbar-brand' to='/'>
         Medicure
-      </a>
+      </Link>
       <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
         <ul className='navbar-nav ml-auto'>
           <li className='nav-item'>
