@@ -1,38 +1,35 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import Auth from "../utils/Auth";
-const Login = () => {
+import Auth from '../utils/Auth';
+import { useHistory } from 'react-router';
+import Home from '../home';
+import Navbar from '../layout/navbar';
+const Login = (props) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    // console.log(name,email,password1,password2);
-  };
-  const { email, password } = formData;
- //var handleAjaxResponse;
-//  handleAjaxResponse = (data) => {
-//   console.log(data);
-// }
-  const doLogin = async (e) => {
-    e.preventDefault();
-    var mess= Auth.login(
-      email,
-      password,
-    );
-    if (Auth.loggedIn()) {
-      return <Redirect to={"/home"} />;
-    }
-  };
   console.log(Auth.loggedIn());
   if (Auth.loggedIn()) {
-    return <Redirect to={"/home"} />;
+    props.history.push('home');
   }
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const { email, password } = formData;
+
+  const doLogin = async (e) => {
+    e.preventDefault();
+    const mess = Auth.login(email, password);
+    if (mess) {
+      props.history.push('/home');
+    }
+  };
+
   return (
     <Fragment>
+      <Navbar />
       <form className='form-horizontal' onSubmit={doLogin}>
         <input
           type='text'

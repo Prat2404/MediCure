@@ -1,12 +1,9 @@
 import React from 'react';
-import { Link,Redirect } from 'react-router-dom'
-const Nabar = ({ isAuthenticated }) => {
-  const logout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem('token');
-    return <Redirect to="/login" />;
-  };
-  if (localStorage.token) {
+import { Link, Redirect } from 'react-router-dom';
+import Auth from '../utils/Auth';
+const Navbar = () => {
+  if (Auth.loggedIn()) {
+    // console.log(localStorage.token);
     return (
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>
         <Link className='navbar-brand' to='/'>
@@ -15,7 +12,7 @@ const Nabar = ({ isAuthenticated }) => {
 
         <ul className='navbar-nav ml-auto'>
           <li className='nav-item'>
-            <Link className='nav-link' to='/' onClick={logout}>
+            <Link className='nav-link' to='/logout'>
               Logout
             </Link>
           </li>
@@ -46,4 +43,4 @@ const Nabar = ({ isAuthenticated }) => {
   );
 };
 
-export default Nabar;
+export default Navbar;

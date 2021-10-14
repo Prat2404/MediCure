@@ -13,6 +13,7 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
+import AuthRouter from './components/AuthRouter';
 function App() {
   const [isAuthenticated, setisAuthenticated] = useState(false);
   useEffect(() => {
@@ -23,18 +24,7 @@ function App() {
 
   return (
     <Router>
-      <Fragment>
-        <Nabar isAuthenticated={isAuthenticated} />
-        <Route exact path='/' component={Landing} />
-        <section className='container'>
-          <Switch>
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/doctor' component={DoctorRegister} />
-            <Route exact path='/home' component={Home} />
-          </Switch>
-        </section>
-      </Fragment>
+      <AuthRouter />
     </Router>
   );
 }

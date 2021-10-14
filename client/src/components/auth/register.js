@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
-function Register() {
+import Navbar from '../layout/navbar';
+const Register = (props) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,10 +35,14 @@ function Register() {
           },
           { headers }
         )
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('token', res.data.token);
+        })
         .catch((error) => {
           console.log('Error ========>', error.response.data);
         });
+      props.history.push('/login');
     }
   };
   if (localStorage.token) {
@@ -45,6 +50,7 @@ function Register() {
   }
   return (
     <Fragment>
+      <Navbar />
       <form className='form-horizontal' onSubmit={doRegister}>
         <input
           type='text'
@@ -80,6 +86,6 @@ function Register() {
       </form>
     </Fragment>
   );
-}
+};
 
 export default Register;
