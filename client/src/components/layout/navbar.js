@@ -9,8 +9,12 @@ const Navbar = () => {
         <Link className='navbar-brand' to='/'>
           Medicure
         </Link>
-
         <ul className='navbar-nav ml-auto'>
+          <li className='nav-item'>
+            <Link className='nav-link' to='/appointment'>
+              Book Appointment
+            </Link>
+          </li>
           <li className='nav-item'>
             <Link className='nav-link' to='/logout'>
               Logout

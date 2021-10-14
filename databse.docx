@@ -9,15 +9,18 @@ patientProfile:
             [{ Presciptions : { Date, Presciptions }, LabReports: {Date,  LabReports} }]
         }
 doctorProfile:
-    Address,Gender
+    Gender,location,Hospital
 appointment:
     patientId:
-    doctorId:
+    location:
+    doctorId: //drop down
+    Date:
     TimeSlot:
     Recipt:
     Mode: Online/Offline
     Symptons:
     PastHistory:
+    upload files:
 notes:
     doctorId:
     {
@@ -27,4 +30,10 @@ notes:
 pathology:
 
 chat(window):
-    
+
+routes:
+    bookappointment
+    fetchappointments 
+    editappointment
+    cancelappointments
+    fetchreports
