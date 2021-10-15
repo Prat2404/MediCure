@@ -9,26 +9,31 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  TimeSlot: {
+  BookingDate: {
     type: Date,
     required: true,
+    default: new Date(),
+  },
+  Date: {
+    type: Date,
+    // required: true,
   },
   Recipt: {
     type: String,
-    required: true,
+    // required: true,
   },
   AppoinmentMode: {
     type: String,
-    required: true,
+    // required: true,
     //choice physical or online
   },
   Symptoms: {
     type: String,
-    required: true,
+    // required: true,
   },
   PastHistoryOfMedical: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 

@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const login = require('./routes/login');
 const register = require('./routes/register');
-
+const appoinment = require('./routes/appointment');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -30,3 +30,4 @@ app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 // Define routes
 app.use('/login', login);
 app.use('/register', register);
+app.use('/appointment', appoinment);
