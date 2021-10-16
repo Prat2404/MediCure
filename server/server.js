@@ -5,6 +5,7 @@ const cors = require('cors');
 const login = require('./routes/login');
 const register = require('./routes/register');
 const appoinment = require('./routes/appointment');
+const chat = require('./routes/chat/chat');
 const app = express();
 
 const PORT = process.env.PORT || 5000;

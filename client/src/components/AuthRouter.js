@@ -13,6 +13,8 @@ import Home from './home';
 import Logout from './utils/logout';
 import Navbar from './layout/navbar';
 import Landing from './layout/landing';
+import Chat from './chat/chat';
+import Peer from 'peerjs';
 const AuthRouter = () => {
   return (
     <Fragment>
@@ -22,6 +24,7 @@ const AuthRouter = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/logout' component={Logout} />
         <Route exact path='/home' component={Home} />
+        <Route exact path='/chat' component={Chat} />
       </Switch>
     </Fragment>
   );
