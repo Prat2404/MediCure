@@ -15,13 +15,6 @@ import {
 } from 'react-router-dom';
 import AuthRouter from './components/AuthRouter';
 function App() {
-  const [isAuthenticated, setisAuthenticated] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem('Token')) {
-      setisAuthenticated(true);
-    }
-  }, []);
-
   return (
     <Router>
       <AuthRouter />

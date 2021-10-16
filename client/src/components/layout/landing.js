@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import Auth from '../utils/Auth';
+import Auth from '../../utils/Auth';
 import Navbar from './navbar';
 const Landing = () => {
   console.log(Auth.loggedIn());
@@ -10,7 +10,7 @@ const Landing = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className='lading'>
+      <div className='Landing'>
         <Link to='/'>
           <button>Patient</button>
         </Link>

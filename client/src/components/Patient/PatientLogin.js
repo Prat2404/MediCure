@@ -1,16 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import axios from 'axios';
-import { Redirect } from 'react-router';
 import Auth from '../../utils/Auth';
-import { useHistory } from 'react-router';
-import Home from '../home';
-import Navbar from '../layout/navbar';
-const Login = (props) => {
+import Navbar from './PatientNavbar';
+const PatientLogin = (props) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  // console.log(Auth.loggedIn());
+  console.log(Auth.loggedIn());
   if (Auth.loggedIn()) {
     props.history.push('home');
   }
@@ -21,7 +17,7 @@ const Login = (props) => {
 
   const doLogin = async (e) => {
     e.preventDefault();
-    const mess = Auth.login(email, password);
+    const mess = Auth.PatientLogin(email, password);
     if (mess) {
       props.history.push('/home');
     }
@@ -53,4 +49,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default PatientLogin;
