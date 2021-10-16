@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema
 const UserSchema = mongoose.Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'patient'
+  },
   Address: {
     type: String,
     required: true,
   },
   Gender: {
     type: String,
-    required: true,
+   required: true,
   },
-  PatientHistory: [
-    {
       Prescription: [
         {
           Timings: {
@@ -35,8 +37,7 @@ const UserSchema = mongoose.Schema({
           },
         },
       ],
-    },
-  ],
+
 });
 
 module.exports = mongoose.model('patientProfile', UserSchema);
