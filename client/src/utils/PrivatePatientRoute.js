@@ -22,7 +22,7 @@ const PrivatePatientRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        state ? <Component {...props} /> : <Redirect to='/' />
+        state ? <Component {...props} /> : <Redirect to='/patient/' />
       }
     />
   );
