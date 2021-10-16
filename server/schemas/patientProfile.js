@@ -11,7 +11,7 @@ const UserSchema = mongoose.Schema({
   },
   Gender: {
     type: String,
-    required: true,
+   required: true,
   },
       Prescription: [
         {
