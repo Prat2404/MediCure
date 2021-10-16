@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const doctor = require('../schemas/doctor');
+const Doctor = require('../schemas/doctor');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const jwtSecret = require('../config/keys').jwtSecret;
@@ -26,14 +26,14 @@ router.post(
       const email = req.body.Email;
       const password = req.body.Password;
       // check whether this doctor already exist
-      let doctor = await doctor.findOne({ Email: email });
+      let doctor = await Doctor.findOne({ Email: email });
       if (doctor) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'user already exists' }] });
       }
       // Create new doctor object
-      doctor = new doctor({
+       doctor = new Doctor({
         Name: name,
         Email: email,
         Password: password,
@@ -45,10 +45,10 @@ router.post(
       await doctor.save();
 
       // Return web token
-      const doctor = true;
+      const flag = true;
       const payload = {
         user: {
-          doctor: doctor,
+          doctor: flag,
           id: doctor.id,
         },
       };

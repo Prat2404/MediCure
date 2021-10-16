@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const doctor = require('../schemas/doctor');
+const Doctor = require('../schemas/doctor');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const jwtSecret = require('../config/keys').jwtSecret;
@@ -26,7 +26,7 @@ router.post(
       const passwd = req.body.Password;
       console.log(email, passwd);
       //check user exists or not
-      let doctor = await doctor.findOne({ Email: email });
+      let doctor = await Doctor.findOne({ Email: email });
       if (!doctor) {
         return res
           .status(400)
@@ -41,10 +41,10 @@ router.post(
       if (!passwdCheck) {
         return res.status(400).json({ error: { msg: 'Wrong password' } });
       }
-      const doctor = true;
+      const flag = true;
       const payload = {
         user: {
-          doctor: doctor,
+          doctor: flag,
           id: doctor.id,
         },
       };

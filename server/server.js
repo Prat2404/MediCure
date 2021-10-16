@@ -6,6 +6,9 @@ const login = require('./routes/login');
 const register = require('./routes/register');
 const appoinment = require('./routes/appointment');
 const profile = require('./routes/profile')
+const dlogin = require('./routes/logindoctor');
+const dregister = require('./routes/registerdoctor');
+const dprofile = require('./routes/profiledoctor')
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -33,3 +36,7 @@ app.use('/login', login);
 app.use('/register', register);
 app.use('/appointment', appoinment);
 app.use('/profile',profile)
+app.use('/doctor/login', dlogin);
+app.use('/doctor/register', dregister);
+app.use('/doctor/profile',dprofile)
+
