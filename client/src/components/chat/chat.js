@@ -61,7 +61,7 @@ const Chat = () => {
         remoteVideoRef.current.play();
       };
     return (
-      <div className="App">
+      <div className="Chat">
         <h1>Current user id is {peerId}</h1>
         <input type="text" value={remotePeerIdValue} onChange={e => setRemotePeerIdValue(e.target.value)} />
         <button onClick={() => call(remotePeerIdValue)}>Call</button>

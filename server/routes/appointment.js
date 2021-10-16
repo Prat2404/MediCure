@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('../config/keys');
 const Appointment = require('../schemas/appointmentDetails');
 // @route  POST /login
 // @desc   Test route
