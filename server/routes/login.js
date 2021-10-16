@@ -41,10 +41,10 @@ router.post(
       if (!passwdCheck) {
         return res.status(400).json({ error: { msg: 'Wrong password' } });
       }
-      const doctor = false;
+      const flag = false;
       const payload = {
         user: {
-          doctor: doctor,
+          doctor: flag,
           id: patient.id,
         },
       };

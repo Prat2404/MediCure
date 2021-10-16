@@ -45,10 +45,10 @@ router.post(
       await patient.save();
 
       // Return web token
-      const doctor = false;
+      const flag = false;
       const payload = {
         user: {
-          doctor: doctor,
+          doctor: flag,
           id: patient.id,
         },
       };
