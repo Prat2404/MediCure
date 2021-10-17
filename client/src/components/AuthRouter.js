@@ -20,6 +20,7 @@ import PrivatePatientRoute from '../utils/PrivatePatientRoute';
 import PrivateDoctorRoute from '../utils/PrivateDoctorRoute';
 import PatientProfile from './Patient/PatientProfile';
 import DoctorProfile from './Doctor/DoctorProfile';
+import DoctorScheduleTiming from './Doctor/DoctorScheduleTiming';
 
 const AuthRouter = () => {
   return (
@@ -53,6 +54,11 @@ const AuthRouter = () => {
           exact
           path='/doctor/profile'
           component={DoctorProfile}
+        />
+        <PrivateDoctorRoute
+          exact
+          path='/doctor/scheduleTimings'
+          component={DoctorScheduleTiming}
         />
       </Switch>
     </Router>

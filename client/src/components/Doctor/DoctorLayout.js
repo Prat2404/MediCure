@@ -1,4 +1,4 @@
-import { Avatar, Drawer, Typography } from '@mui/material';
+import { Avatar, CssBaseline, Drawer, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
 import List from '@mui/material/List';
@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import { useHistory, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -57,10 +58,16 @@ const DoctorLayout = ({ children }) => {
       icon: <HomeOutlinedIcon color='secondary' />,
       path: '/doctor/home',
     },
+    {
+      text: 'Schedule Timings',
+      icon: <HourglassBottomIcon color='secondary' />,
+      path: '/doctor/scheduleTimings',
+    },
   ];
   return (
     <div className={classes.root}>
       {/* navigation bar */}
+      <CssBaseline />
       <AppBar
         position='fixed'
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
