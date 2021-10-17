@@ -1,10 +1,10 @@
 import { Container, TextField, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-
+import axios from 'axios';
 import { makeStyles } from '@mui/styles';
 
 import React, { useState, useEffect, Fragment } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router-dom';
 import Auth from '../../utils/Auth';
 const useStyle = makeStyles({
   field:{
@@ -19,38 +19,36 @@ const PatientLogin = (props) => {
   const classes = useStyle();
   const [emailError, setEmailError] = useState(false);
   const [passwdError, setPasswdError] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
- 
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const { email, password } = formData;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
+  const history = useHistory();
   const doLogin = async (e) => {
     e.preventDefault();
-    setEmailError(false);
-    setPasswdError(false);
 
-    if(email=='')
-    {
-      setEmailError(true);
-      return
-    }
-    if(password=='')
-    {
-      setPasswdError(true);
-
-    }
     
-    if(email&&password)
-    {
-      
-      Auth.PatientLogin(email, password) ? props.history.push('/patient/home/'):(console.log('Login error'));
-      
-   }
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+
+      axios
+        .post(
+          'http://localhost:5000/login',
+          {
+            Email: email,
+            Password: password,
+          },
+          { headers }
+        )
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('token', res.data.token);
+          history.push('/patient/home');
+        })
+        .catch((error) => {
+          console.log('Error ========>', error.response.data);
+        });
+    
   };
 
   return (
@@ -65,7 +63,7 @@ const PatientLogin = (props) => {
          required 
          name='email'
          placeholder='Email'
-         onChange={onChange}
+         onChange={(e) => {setEmail(e.target.value);}}
          error={emailError}
           />
         <TextField 
@@ -75,14 +73,14 @@ const PatientLogin = (props) => {
         name='password'
         error={passwdError}
         required
-        onChange={onChange} />
+        onChange={(e) => {setPassword(e.target.value);}}
+         />
         <Button 
         type='submit' 
         variant='contained'
         color='primary'
         > Login</Button>
       </form>
-      
     </Container>
   );
 };

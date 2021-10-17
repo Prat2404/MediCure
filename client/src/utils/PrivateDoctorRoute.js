@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import DoctorLayout from '../components/Doctor/DoctorLayout';
 import Auth from './Auth';
 
 const PrivateDoctorRoute = ({ component: Component, ...rest }) => {
@@ -12,7 +13,13 @@ const PrivateDoctorRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        check() ? <Component {...props} /> : <Redirect to='/doctor/' />
+        check() ? (
+          <DoctorLayout>
+            <Component {...props} />
+          </DoctorLayout>
+        ) : (
+          <Redirect to='/doctor/' />
+        )
       }
     />
   );
