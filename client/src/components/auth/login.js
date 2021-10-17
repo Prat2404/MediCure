@@ -30,7 +30,7 @@ const Login = (props) => {
   return (
     <Fragment>
       <Navbar />
-      <form className='form-horizontal' onSubmit={doLogin}>
+      <form className='form-vertical' onSubmit={doLogin}>
         <input
           type='text'
           name='email'

@@ -36,8 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.Landing {
-  background: url(https://wallpaperaccess.com/full/185895.jpg);
-
-  background-size: cover; /* Resize the background image to cover the entire container */
-}

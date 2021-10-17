@@ -4,7 +4,6 @@ import Navbar from './PatientNavbar';
 const PatientLanding = () => {
   return (
     <Fragment>
-      <Navbar />
       <div>Patient Landing</div>
     </Fragment>
   );

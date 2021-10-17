@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import Navbar from './layout/navbar';
-
+import DashboardNavbar from './Patient/DashboardNavbar';
 const Home = () => {
   return (
     <Fragment>
-      <Navbar />
+      <DashboardNavbar />
       <div>This is Home</div>
     </Fragment>
   );
