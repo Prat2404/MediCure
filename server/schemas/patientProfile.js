@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 const UserSchema = mongoose.Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'patient'
+    ref: 'patient',
   },
   Address: {
     type: String,
@@ -11,33 +11,32 @@ const UserSchema = mongoose.Schema({
   },
   Gender: {
     type: String,
-   required: true,
+    required: true,
   },
-      Prescription: [
-        {
-          Timings: {
-            type: Date,
-            required: true,
-          },
-          MedicineDetails: {
-            type: String,
-            required: true,
-          },
-        },
-      ],
-      LabReport: [
-        {
-          Timings: {
-            type: Date,
-            required: true,
-          },
-          LabResult: {
-            type: String,
-            required: true,
-          },
-        },
-      ],
-
+  Prescription: [
+    {
+      Timings: {
+        type: Date,
+        required: true,
+      },
+      MedicineDetails: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  LabReport: [
+    {
+      Timings: {
+        type: Date,
+        required: true,
+      },
+      LabResult: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model('patientProfile', UserSchema);
