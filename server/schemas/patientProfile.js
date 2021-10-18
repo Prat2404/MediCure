@@ -5,13 +5,35 @@ const UserSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'patient',
   },
+  First_Name: {
+    type: String,
+  },
+  Last_Name: {
+    type: String,
+  },
+  DOB: {
+    type: Date,
+  },
+  blood: {
+    type: String,
+  },
+  Phone: {
+    type: String,
+  },
   Address: {
     type: String,
-    required: true,
+  },
+  City: {
+    type: String,
+  },
+  State: {
+    type: String,
+  },
+  PinCode: {
+    type: String,
   },
   Gender: {
     type: String,
-    required: true,
   },
   Prescription: [
     {
@@ -38,5 +60,10 @@ const UserSchema = mongoose.Schema({
     },
   ],
 });
-
+//Pincode
+//City
+//State
+//Phone Number
+//Specialisation
+//Degree
 module.exports = mongoose.model('patientProfile', UserSchema);

@@ -18,7 +18,6 @@ const useStyle = makeStyles({
 const PatientRegister = (props) => {
   const classes = useStyle();
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
@@ -39,7 +38,6 @@ const PatientRegister = (props) => {
         .post(
           'http://localhost:5000/register',
           {
-            Name: name,
             Email: email,
             Password: password1,
           },
@@ -60,15 +58,6 @@ const PatientRegister = (props) => {
     <Container>
       <Typography className={classes.field}>Sign Up</Typography>
       <form onSubmit={doRegister}>
-        <TextField
-          type='text'
-          name='name'
-          placeholder='Name'
-          className={classes.text}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
         <TextField
           type='text'
           name='email'

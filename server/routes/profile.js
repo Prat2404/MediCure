@@ -48,50 +48,47 @@ router.get('/Email/:email', (req, res) => {
 // @route   POST api/profile
 // @desc    Create or edit user profile
 // @access  Private
-router.post(
-  '/',
-  [
-    check('Address', 'Address required').not().isEmpty(),
-    check('Gender', 'Gender required').not().isEmpty(),
-  ],
-  auth,
-  (req, res) => {
-    // Check Validation
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    // Get fields
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (req.body.Address) profileFields.Address = req.body.Address;
-    if (req.body.Gender) profileFields.Gender = req.body.Gender;
-    // Skills - Spilt into array
-    if (typeof req.body.skills !== 'undefined') {
-      profileFields.skills = req.body.skills.split(',');
-    }
-
-    Profile.findOne({ user: req.user.id }).then((profile) => {
-      if (profile) {
-        // Updatene
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        ).then((profile) => res.json(profile));
-      } else {
-        // Create
-        // Save Profile
-        Profile.findOne({ user: req.user.id }).then((profile) => {
-          // Save Profile
-          new Profile(profileFields)
-            .save()
-            .then((profile) => res.json(profile));
-        });
-      }
-    });
+router.post('/', auth, (req, res) => {
+  // Check Validation
+  console.log(req.body);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
-);
+  // Get fields
+  const profileFields = {};
+  profileFields.user = req.user.id;
+  if (req.body.Address) profileFields.Address = req.body.Address;
+  if (req.body.first_name) profileFields.first_name = req.body.first_name;
+  if (req.body.last_name) profileFields.last_name = req.body.last_name;
+  if (req.body.DOB) profileFields.DOB = req.body.DOB;
+  if (req.body.City) profileFields.City = req.body.City;
+  if (req.body.State) profileFields.State = req.body.State;
+  if (req.body.Mobile) profileFields.Mobile = req.body.Mobile;
+
+  // Skills - Spilt into array
+  if (typeof req.body.skills !== 'undefined') {
+    profileFields.skills = req.body.skills.split(',');
+  }
+
+  Profile.findOne({ user: req.user.id }).then((profile) => {
+    if (profile) {
+      // Updatene
+      Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      ).then((profile) => res.json(profile));
+    } else {
+      // Create
+      // Save Profile
+      Profile.findOne({ user: req.user.id }).then((profile) => {
+        // Save Profile
+        new Profile(profileFields).save().then((profile) => res.json(profile));
+      });
+    }
+  });
+});
 
 // @route   DELETE api/profile
 // @desc    Delete user and profile
