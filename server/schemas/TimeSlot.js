@@ -16,7 +16,9 @@ const TimeSlotSchema = mongoose.Schema({
       text: String,
       slots: [
         {
-          slot: Slot,
+          startTime: String,
+          endTime: String,
+          status: String,
         },
       ],
     },

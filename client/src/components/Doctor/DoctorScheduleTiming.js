@@ -1,4 +1,6 @@
 import {
+  Button,
+  ButtonGroup,
   Card,
   CardContent,
   CardHeader,
@@ -7,74 +9,58 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-const days = [
-  {
-    text: 'Monday',
-    slot: [
-      {
-        time: '12-12:15',
-        mode: 'offline',
-      },
-    ],
-  },
-  {
-    text: 'TuesDay',
-    slot: [
-      {
-        time: '12-12:15',
-        mode: 'offline',
-      },
-    ],
-  },
-  {
-    text: 'WednesDay',
-    slot: [
-      {
-        time: '12-12:15',
-        mode: 'offline',
-      },
-    ],
-  },
-  {
-    text: 'Thursday',
-    slot: [
-      {
-        time: '12-12:15',
-        mode: 'offline',
-      },
-    ],
-  },
-  {
-    text: 'Friday',
-    slot: [
-      {
-        time: '12-12:15',
-        mode: 'offline',
-      },
-    ],
-  },
-  {
-    text: 'Saturday',
-    slot: [
-      {
-        time: '12-12:15',
-        mode: 'offline',
-      },
-    ],
-  },
-  {
-    text: 'Sunday',
-    slot: [],
-  },
-];
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import defaultValues from './Default/defaultValues';
+const getDoctorId = () => {
+  const token = localStorage.getItem('token');
+  const decode = jwt_decode(token);
+  return decode.user.id;
+};
+const variant = ['success', 'primary', 'secondary'];
 const DoctorScheduleTiming = () => {
+  const [days, setDays] = useState([
+    {
+      dayId: '',
+      text: '',
+      slots: [
+        {
+          startTime: '',
+          endTime: '',
+          status: '', //1(Online)0(offline)2(Unavilable)
+        },
+      ],
+    },
+  ]);
+  const [doctorId, setDoctorId] = useState('');
+  useEffect(() => {
+    setDoctorId(getDoctorId());
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+
+    axios
+      .post(
+        'http://localhost:5000/doctor/scheduleTimings',
+        {
+          DoctorId: getDoctorId(),
+          Days: defaultValues.days,
+        },
+        { headers }
+      )
+      .then((res) => {
+        setDays(res.data.Days);
+      })
+      .catch((error) => {
+        console.log('Error ========>', error.response.data);
+      });
+  }, []);
   const [selectedTab, setselectedTab] = useState(0);
   const handleOnchange = (e, newValue) => {
     setselectedTab(newValue);
@@ -90,19 +76,17 @@ const DoctorScheduleTiming = () => {
                 <Tab label={day.text} />
               ))}
             </Tabs>
-            <List>
-              {days[selectedTab].slot.map((slot) => (
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge='end' aria-label='delete'>
-                      <DeleteIcon />
-                    </IconButton>
-                  }
+            <ButtonGroup>
+              {days[selectedTab].slots.map((slot) => (
+                <Button
+                  variant='contained'
+                  color={variant[slot.status]}
+                  onClick={console.log('Button Clicked')}
                 >
-                  <ListItemText primary={slot.time} secondary={slot.mode} />
-                </ListItem>
+                  {slot.startTime}
+                </Button>
               ))}
-            </List>
+            </ButtonGroup>
           </Box>
         </CardContent>
       </Card>

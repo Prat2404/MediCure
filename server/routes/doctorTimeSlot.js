@@ -17,7 +17,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      console.log(req.body);
+      // console.log(req.body);
       const doc = req.body.DoctorId;
       let timeSlot = await TimeSlot.findOne({ DoctorId: doc });
       if (timeSlot) {
@@ -40,7 +40,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      console.log(req.body);
+      // console.log(req.body);
       const doc = req.body.DoctorId;
       const days = req.body.Days;
       let timeSlot = await TimeSlot.findOne({ DoctorId: doc });
