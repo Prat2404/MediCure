@@ -5,154 +5,112 @@ const PatientProfile = () => {
     <div>
       <div class='container'>
         <div class='row gutters'>
-          <div class='col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12'>
-            <div class='card h-100'>
+          <div class='col-md-12 col-lg-12 col-xl-12'>
+            <div class='card'>
               <div class='card-body'>
-                <div class='account-settings'>
-                  <div class='user-profile'>
-                    <div class='user-avatar'>
-                      <img
-                        src='https://bootdey.com/img/Content/avatar/avatar7.png'
-                        alt='Maxwell Admin'
-                      />
+                <form>
+                  <div class='row form-row'>
+                    <div class='col-12 col-md-12'>
+                      <div class='form-group'>
+                        <div class='change-avatar'>
+                          <div class='profile-img'>
+                            <img src='...jpg' alt='User' />
+                          </div>
+                          <div class='upload-img'>
+                            <div class='change-photo-btn'>
+                              <span>
+                                <i class='fa fa-upload'></i> Upload Photo
+                              </span>
+                              <input type='file' class='upload' />
+                            </div>
+                            <small class='form-text'>
+                              Allowed JPG, GIF or PNG. Max size of 2MB
+                            </small>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <h5 class='user-name'>Yuki Hayashi</h5>
-                    <h6 class='user-email'>yuki@Maxwell.com</h6>
-                  </div>
-                  <div class='about'>
-                    <h5>About</h5>
-                    <p>
-                      I'm Yuki. Full Stack Designer I enjoy creating
-                      user-centric, delightful and human experiences.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12'>
-            <div class='card h-100'>
-              <div class='card-body'>
-                <div class='row gutters'>
-                  <div class='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'>
-                    <h6 class='mb-2 text-primary'>Personal Details</h6>
-                  </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='fullName'>Full Name</label>
-                      <input
-                        type='text'
-                        class='form-control'
-                        id='fullName'
-                        placeholder='Enter full name'
-                      />
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>First Name</label>
+                        <input type='text' class='form-control' />
+                      </div>
                     </div>
-                  </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='eMail'>Email</label>
-                      <input
-                        type='email'
-                        class='form-control'
-                        id='eMail'
-                        placeholder='Enter email ID'
-                      />
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>Last Name</label>
+                        <input type='text' class='form-control' />
+                      </div>
                     </div>
-                  </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='phone'>Phone</label>
-                      <input
-                        type='text'
-                        class='form-control'
-                        id='phone'
-                        placeholder='Enter phone number'
-                      />
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>Date of Birth</label>
+                        <div class='cal-icon'>
+                          <input
+                            type='date'
+                            class='form-control datetimepicker'
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='website'>Website URL</label>
-                      <input
-                        type='url'
-                        class='form-control'
-                        id='website'
-                        placeholder='Website url'
-                      />
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>Blood Group</label>
+                        <select class='form-control select'>
+                          <option>A-</option>
+                          <option>A+</option>
+                          <option>B-</option>
+                          <option>B+</option>
+                          <option>AB-</option>
+                          <option>AB+</option>
+                          <option>O-</option>
+                          <option>O+</option>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class='row gutters'>
-                  <div class='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'>
-                    <h6 class='mt-3 mb-2 text-primary'>Address</h6>
-                  </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='Street'>Street</label>
-                      <input
-                        type='name'
-                        class='form-control'
-                        id='Street'
-                        placeholder='Enter Street'
-                      />
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>Email ID</label>
+                        <input type='email' class='form-control' />
+                      </div>
                     </div>
-                  </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='ciTy'>City</label>
-                      <input
-                        type='name'
-                        class='form-control'
-                        id='ciTy'
-                        placeholder='Enter City'
-                      />
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>Mobile</label>
+                        <input type='text' class='form-control' />
+                      </div>
+                    </div>
+                    <div class='col-12'>
+                      <div class='form-group'>
+                        <label>Address</label>
+                        <input type='text' class='form-control' />
+                      </div>
+                    </div>
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>City</label>
+                        <input type='text' class='form-control' />
+                      </div>
+                    </div>
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>State</label>
+                        <input type='text' class='form-control' />
+                      </div>
+                    </div>
+                    <div class='col-12 col-md-6'>
+                      <div class='form-group'>
+                        <label>Pin Code</label>
+                        <input type='text' class='form-control' />
+                      </div>
                     </div>
                   </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='sTate'>State</label>
-                      <input
-                        type='text'
-                        class='form-control'
-                        id='sTate'
-                        placeholder='Enter State'
-                      />
-                    </div>
+                  <div class='submit-section'>
+                    <button type='submit' class='btn btn-primary submit-btn'>
+                      Save Changes
+                    </button>
                   </div>
-                  <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
-                    <div class='form-group'>
-                      <label for='zIp'>Zip Code</label>
-                      <input
-                        type='text'
-                        class='form-control'
-                        id='zIp'
-                        placeholder='Zip Code'
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class='row gutters'>
-                  <div class='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'>
-                    <div class='text-right'>
-                      <button
-                        type='button'
-                        id='submit'
-                        name='submit'
-                        class='btn btn-secondary'
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type='button'
-                        id='submit'
-                        name='submit'
-                        class='btn btn-primary'
-                      >
-                        Update
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                </form>
               </div>
             </div>
           </div>
