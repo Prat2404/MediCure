@@ -21,6 +21,7 @@ import PrivateDoctorRoute from '../utils/PrivateDoctorRoute';
 import PatientProfile from './Patient/PatientProfile';
 import DoctorProfile from './Doctor/DoctorProfile';
 import DoctorScheduleTiming from './Doctor/DoctorScheduleTiming';
+import PatientSearchDoctor from './Patient/PatientSearchDoctor';
 
 const AuthRouter = () => {
   return (
@@ -43,6 +44,11 @@ const AuthRouter = () => {
           exact
           path='/patient/profile'
           component={PatientProfile}
+        />
+        <PrivatePatientRoute
+          exact
+          path='/patient/searchDoctors'
+          component={PatientSearchDoctor}
         />
 
         {/* //doctor routes */}

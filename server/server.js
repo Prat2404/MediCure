@@ -5,10 +5,12 @@ const cors = require('cors');
 const login = require('./routes/login');
 const register = require('./routes/register');
 const appoinment = require('./routes/appointment');
-const profile = require('./routes/profile')
+const profile = require('./routes/profile');
 const dlogin = require('./routes/logindoctor');
 const dregister = require('./routes/registerdoctor');
-const dprofile = require('./routes/profiledoctor')
+const dprofile = require('./routes/profiledoctor');
+const doctorTimeSlot = require('./routes/doctorTimeSlot');
+const appointmentAvailability = require('./routes/appointmentAvailability');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -35,8 +37,9 @@ app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 app.use('/login', login);
 app.use('/register', register);
 app.use('/appointment', appoinment);
-app.use('/profile',profile)
+app.use('/profile', profile);
 app.use('/doctor/login', dlogin);
 app.use('/doctor/register', dregister);
-app.use('/doctor/profile',dprofile)
-
+app.use('/doctor/profile', dprofile);
+app.use('/doctor/scheduleTimings', doctorTimeSlot);
+app.use('/patient/find-appointment-availability', appointmentAvailability);
