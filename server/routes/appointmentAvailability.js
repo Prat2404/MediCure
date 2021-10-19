@@ -7,7 +7,8 @@ router.post('/', auth, async (req, res) => {
   console.log(req.body);
   const d = req.body.date;
   const from = d.split('-');
-  const date = new Date(from[2], from[1] - 1, from[0]);
+  const date = new Date(from[0], from[1] - 1, from[2]);
+  console.log(date);
   const docId = req.body.DoctorId;
   const day = date.getDay();
 
