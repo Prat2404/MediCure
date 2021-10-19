@@ -9,22 +9,68 @@ patientProfile:
             [{ Presciptions : { Date, Presciptions }, LabReports: {Date,  LabReports} }]
         }
 doctorProfile:
-    Address,Gender
+    Gender,location,Hospital
 appointment:
     patientId:
-    doctorId:
-    TimeSlot:
+    location:
+    doctorId: //drop down
+    Date:
+    slot:
     Recipt:
     Mode: Online/Offline
     Symptons:
     PastHistory:
+    upload files:
 notes:
     doctorId:
     {
       [{  patientId: [ {Date : Note}] } ]
     }
-
 pathology:
 
 chat(window):
-    
+
+routes:
+    bookappointment
+    fetchappointments 
+    editappointment
+    cancelappointments
+    fetchreports
+
+TimeSlot:
+{
+    doctorId:'',
+    days:[
+        {
+            id:0
+            text:'Monday',
+            slots:[
+                {slot:{starttime: 9:00 AM endtime: 9:15 AM status:(online/offline/deactive)}}
+                {slot:{starttime: 9:15 AM endtime: 9:30 AM status:(online/offline/deactive)}}
+                {slot:{starttime: 10:00 AM endtime: 10:15 AMstatu:(online/offline/deactive)}}
+               
+            ]
+        },
+          {
+            id:1
+            text:'Tuesday',
+            slots:[
+
+                {slot:{starttime: 9:00 AM endtime: 9:15 AM status:(online/offline/deactive)}}
+                {slot:{starttime: 9:15 AM endtime: 9:30 AM status:(online/offline/deactive)}}
+                {slot:{starttime: 10:00 AM endtime: 10:15 AMstatu:(online/offline/deactive)}}
+               
+            ]
+        }
+        ..
+    ]
+}
+// client doctorId and date
+
+// appointment waal
+AvailabeSlot:{
+    date:'17/10/2021'
+     slots:[
+                {slot:{starttime: 9:00 AM endtime: 9:15 AM isBooked:true}}
+            ]
+}

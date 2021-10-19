@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const Patient = require('../schemas/patient');
+const Doctor = require('../schemas/doctor');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const jwtSecret = require('../config/keys').jwtSecret;
@@ -11,6 +11,7 @@ const jwtSecret = require('../config/keys').jwtSecret;
 router.post(
   '/',
   [
+    check('Name', 'Name is required').not().isEmpty(),
     check('Email', 'Please enter valid email').isEmail(),
     check('Password', 'Please enter a valid password').isLength({ min: 6 }),
   ],
@@ -24,30 +25,31 @@ router.post(
       const name = req.body.Name;
       const email = req.body.Email;
       const password = req.body.Password;
-      // check whether this patient already exist
-      let patient = await Patient.findOne({ Email: email });
-      if (patient) {
+      // check whether this doctor already exist
+      let doctor = await Doctor.findOne({ Email: email });
+      if (doctor) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'user already exists' }] });
       }
-      // Create new patient object
-      patient = new Patient({
+      // Create new doctor object
+       doctor = new Doctor({
+        Name: name,
         Email: email,
         Password: password,
       });
       // Encrypt password
       const salt = await bcrypt.genSalt(10);
-      patient.Password = await bcrypt.hash(password, salt);
+      doctor.Password = await bcrypt.hash(password, salt);
 
-      await patient.save();
+      await doctor.save();
 
       // Return web token
-      const flag = false;
+      const flag = true;
       const payload = {
         user: {
           doctor: flag,
-          id: patient.id,
+          id: doctor.id,
         },
       };
       jwt.sign(payload, jwtSecret, { expiresIn: 36000 }, (err, token) => {

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const Patient = require('../schemas/patient');
+const Doctor = require('../schemas/doctor');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const jwtSecret = require('../config/keys').jwtSecret;
@@ -26,8 +26,8 @@ router.post(
       const passwd = req.body.Password;
       console.log(email, passwd);
       //check user exists or not
-      let patient = await Patient.findOne({ Email: email });
-      if (!patient) {
+      let doctor = await Doctor.findOne({ Email: email });
+      if (!doctor) {
         return res
           .status(400)
           .json({ error: [{ msg: 'No such user exists' }] });
@@ -36,16 +36,16 @@ router.post(
 
       let passwdCheck = await bcrypt.compare(
         req.body.Password,
-        patient.Password
+        doctor.Password
       );
       if (!passwdCheck) {
         return res.status(400).json({ error: { msg: 'Wrong password' } });
       }
-      const flag = false;
+      const flag = true;
       const payload = {
         user: {
           doctor: flag,
-          id: patient.id,
+          id: doctor.id,
         },
       };
       jwt.sign(payload, jwtSecret, { expiresIn: 36000 }, (err, token) => {

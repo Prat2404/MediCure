@@ -1,8 +1,53 @@
 import axios from 'axios';
 import Config from './Config';
-
+import jwt_decode from 'jwt-decode';
 class Auth {
   static login(email, password) {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    axios
+      .post(
+        'http://localhost:5000/login',
+        {
+          Email: email,
+          Password: password,
+        },
+        { headers }
+      )
+      .then((res) => {
+        localStorage.setItem('token', res.data.token);
+      })
+      .catch((error) => {
+        console.log('Error ========>', error.response.data);
+      });
+    if (Auth.loggedIn()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  static DoctorLogin(email, password) {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    axios
+      .post(
+        'http://localhost:5000/doctor/login',
+        {
+          Email: email,
+          Password: password,
+        },
+        { headers }
+      )
+      .then((res) => {
+        localStorage.setItem('token', res.data.token);
+      })
+      .catch((error) => {
+        console.log('Error ========>', error.response.data);
+      });
+  }
+  static PatientLogin(email, password) {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -65,7 +110,18 @@ class Auth {
   //     }
 
   //     return Date.now() > expire;
-  //   }
+  //   }'
+
+  // check if the user is a doctor
+  static isdoctor() {
+    if (Auth.loggedIn()) {
+      const token = localStorage.getItem('token');
+      const decode = jwt_decode(token);
+      console.log(decode);
+      return decode.user.doctor;
+    }
+    return false;
+  }
 }
 
 export default Auth;

@@ -1,29 +1,79 @@
-import React, { Fragment } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import App from '../App';
-import Login from './auth/login';
-import Register from './auth/register';
-import Home from './home';
-import Logout from './utils/logout';
-import Navbar from './layout/navbar';
-import Landing from './layout/landing';
+import React, { Fragment, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Logout from '../utils/logout';
+import Landing from '../landing';
+import Chat from './chat/chat';
+
+import PatientLogin from './Patient/PatientLogin';
+import PatientRegister from './Patient/PatientRegister';
+import PatientHome from './Patient/PatientHome';
+import PatientLanding from './Patient/PatientLanding';
+
+import DoctorRegister from './Doctor/DoctorRegister';
+import DoctorLogin from './Doctor/DoctorLogin';
+import DoctorHome from './Doctor/DoctorHome';
+import DoctorLanding from './Doctor/DoctorLanding';
+
+import PrivateRoute from '../utils/PrivateRoute';
+import PrivatePatientRoute from '../utils/PrivatePatientRoute';
+import PrivateDoctorRoute from '../utils/PrivateDoctorRoute';
+import PatientProfile from './Patient/PatientProfile';
+import DoctorProfile from './Doctor/DoctorProfile';
+import DoctorScheduleTiming from './Doctor/DoctorScheduleTiming';
+import PatientSearchDoctor from './Patient/PatientSearchDoctor';
+import PatientFindAppointments from './Patient/PatientFindAppointments';
+
 const AuthRouter = () => {
   return (
-    <Fragment>
+    <Router>
       <Route exact path='/' component={Landing} />
       <Switch>
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/login' component={Login} />
+        <PrivateRoute exact path='/chat' component={Chat} />
         <Route exact path='/logout' component={Logout} />
-        <Route exact path='/home' component={Home} />
+        {/* patient routes */}
+        <Route exact path='/patient/' component={PatientLogin} />
+        <Route exact path='/patient/login' component={PatientLogin} />
+        <Route exact path={'/patient/register'} component={PatientRegister} />
+
+        <PrivatePatientRoute
+          exact
+          path='/patient/home'
+          component={PatientHome}
+        />
+        <PrivatePatientRoute
+          exact
+          path='/patient/profile'
+          component={PatientProfile}
+        />
+        <PrivatePatientRoute
+          exact
+          path='/patient/searchDoctors'
+          component={PatientSearchDoctor}
+        />
+        <PrivatePatientRoute
+          exact
+          path='/patient/findAppointments'
+          component={PatientFindAppointments}
+        />
+
+        {/* //doctor routes */}
+        <Route exact path='/doctor/' component={DoctorLogin} />
+        <Route exact path='/doctor/register' component={DoctorRegister} />
+        <Route exact path='/doctor/login' component={DoctorLogin} />
+        <PrivateDoctorRoute exact path='/doctor/home' component={DoctorHome} />
+        <PrivateDoctorRoute
+          exact
+          path='/doctor/profile'
+          component={DoctorProfile}
+        />
+        <PrivateDoctorRoute
+          exact
+          path='/doctor/scheduleTimings'
+          component={DoctorScheduleTiming}
+        />
       </Switch>
-    </Fragment>
+    </Router>
   );
 };
 
