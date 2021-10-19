@@ -70,9 +70,15 @@ router.post(
     }
     // Get fields
     const profileFields = {};
-    profileFields.user = req.user.id;
-    if (req.body.Address) profileFields.Address = req.body.Address;
-    if (req.body.Gender) profileFields.Gender = req.body.Gender;
+    profileFields.user = req.user;
+    if (req.body.address) profileFields.Address = req.body.Address;
+    if (req.body.gender) profileFields.Gender = req.body.Gender;
+    if (req.body.specialisation) profileFields.Specialisation = req.body.Specialisation;
+    if (req.body.city) profileFields.City = req.body.City;
+    if (req.body.state) profileFields.State = req.body.State;
+    if (req.body.phonenumber) profileFields.PhoneNumber = req.body.PhoneNumber;
+    if (req.body.pincode) profileFields.Pincode = req.body.Pincode;
+    if(req.body.degree) profileFields.Degree = req.body.Degree;
     // Skills - Spilt into array
     if (typeof req.body.skills !== 'undefined') {
       profileFields.skills = req.body.skills.split(',');
@@ -90,7 +96,6 @@ router.post(
         // Create
           // Save Profile
           Profile.findOne({  user: req.user.id }).then(profile => {
-  
             // Save Profile
             new Profile(profileFields).save().then(profile => res.json(profile));
           });

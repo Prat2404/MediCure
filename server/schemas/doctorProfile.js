@@ -14,13 +14,31 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  Pincode: {
+    type: String,
+    required: true,
+  },
+  City:{
+  type: String,
+  required: true,
+  },
+  State:{
+   type: String,
+   required: true,
+  },
+  PhoneNumber:{
+    type: String,
+    required: true,
+  },
+  Specialisation:{
+    type: String,
+    required: true,
+  },
+  Degree:{
+    type: String,
+    required: true,
+  },
 });
-//Pincode
-//City
-//State
-//Phone Number
-//Specialisation
-//Degree
-//
+
 
 module.exports = mongoose.model('doctorProfile', UserSchema);
