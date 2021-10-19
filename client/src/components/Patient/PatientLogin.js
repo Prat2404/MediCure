@@ -7,13 +7,12 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import Auth from '../../utils/Auth';
 const useStyle = makeStyles({
-  field:{
+  field: {
     marginTop: 20,
     marginBottom: 20,
-    marginLeft:20,
-    display: 'block'
-    
-  }
+    marginLeft: 20,
+    display: 'block',
+  },
 });
 const PatientLogin = (props) => {
   const classes = useStyle();
@@ -26,60 +25,59 @@ const PatientLogin = (props) => {
   const doLogin = async (e) => {
     e.preventDefault();
 
-    
-      const headers = {
-        'Content-Type': 'application/json',
-      };
+    const headers = {
+      'Content-Type': 'application/json',
+    };
 
-      axios
-        .post(
-          'http://localhost:5000/login',
-          {
-            Email: email,
-            Password: password,
-          },
-          { headers }
-        )
-        .then((res) => {
-          console.log(res);
-          localStorage.setItem('token', res.data.token);
-          history.push('/patient/home');
-        })
-        .catch((error) => {
-          console.log('Error ========>', error.response.data);
-        });
-    
+    axios
+      .post(
+        'http://localhost:5000/login',
+        {
+          Email: email,
+          Password: password,
+        },
+        { headers }
+      )
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('token', res.data.token);
+        history.push('/patient/home');
+      })
+      .catch((error) => {
+        console.log('Error ========>', error.response.data);
+      });
   };
 
   return (
     <Container>
-      <Typography className={classes.field}>
-        Login Form
-      </Typography>
+      <Typography className={classes.field}>Login Form</Typography>
       <form noValidate onSubmit={doLogin}>
-        <TextField 
+        <TextField
           label='Email'
-         className={classes.field} 
-         required 
-         name='email'
-         placeholder='Email'
-         onChange={(e) => {setEmail(e.target.value);}}
-         error={emailError}
-          />
-        <TextField 
-        type='password' 
-        className={classes.field} 
-        label='Password' 
-        name='password'
-        error={passwdError}
-        required
-        onChange={(e) => {setPassword(e.target.value);}}
-         />
-        <Button 
-        type='submit' 
-        variant='contained'
-        color='primary'
-        > Login</Button>
+          className={classes.field}
+          required
+          name='email'
+          placeholder='Email'
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          error={emailError}
+        />
+        <TextField
+          type='password'
+          className={classes.field}
+          label='Password'
+          name='password'
+          error={passwdError}
+          required
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <Button type='submit' variant='contained' color='primary'>
+          {' '}
+          Login
+        </Button>
       </form>
     </Container>
   );
