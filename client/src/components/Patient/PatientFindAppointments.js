@@ -57,6 +57,9 @@ const PatientFindAppointments = (props) => {
             component='form'
             sx={{
               '& .MuiTextField-root': { m: 1, width: '25ch' },
+              'margin-top': '20px',
+              'justify-content': 'center',
+              padding: '10px',
             }}
             noValidate
             autoComplete='off'
@@ -92,24 +95,49 @@ const PatientFindAppointments = (props) => {
           <Typography variant='h6' component='h2'>
             {date}
           </Typography>
+          <Typography>Online Appointments</Typography>
           <ButtonGroup>
             {timeSlots.map((timeSlot) => {
-              return (
-                <Button
-                  variant='contained'
-                  color={
-                    timeSlot.status == '2'
-                      ? 'error'
-                      : timeSlot.status == '0'
-                      ? 'success'
-                      : 'primary'
-                  }
-                  disabled={timeSlot.status == '2' ? true : false}
-                  onClick={handleClickOpen}
-                >
-                  {timeSlot.startTime + ' - ' + timeSlot.endTime}
-                </Button>
-              );
+              if (timeSlot.status == '0')
+                return (
+                  <Button
+                    variant='contained'
+                    color='success'
+                    onClick={handleClickOpen}
+                  >
+                    {timeSlot.startTime + ' - ' + timeSlot.endTime}
+                  </Button>
+                );
+            })}
+          </ButtonGroup>
+          <Typography>Offline Appointments</Typography>
+          <ButtonGroup>
+            {timeSlots.map((timeSlot) => {
+              if (timeSlot.status == '1')
+                return (
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={handleClickOpen}
+                  >
+                    {timeSlot.startTime + ' - ' + timeSlot.endTime}
+                  </Button>
+                );
+            })}
+          </ButtonGroup>
+          <Typography>Unavailable Appointments</Typography>
+          <ButtonGroup>
+            {timeSlots.map((timeSlot) => {
+              if (timeSlot.status == '2')
+                return (
+                  <Button
+                    variant='contained'
+                    disabled='true'
+                    onClick={handleClickOpen}
+                  >
+                    {timeSlot.startTime + ' - ' + timeSlot.endTime}
+                  </Button>
+                );
             })}
           </ButtonGroup>
           <Dialog open={open} onClose={handleClickClose}>

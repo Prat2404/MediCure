@@ -24,7 +24,12 @@ const DoctorRegister = (props) => {
   const [password2, setPassword2] = useState('');
 
   const history = useHistory();
-
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      if (Auth.isdoctor()) history.push('/doctor/home');
+      else history.push('/patient/home');
+    }
+  }, []);
   const doRegister = async (e) => {
     e.preventDefault();
 
