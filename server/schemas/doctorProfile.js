@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 const UserSchema = mongoose.Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'doctor'
+    ref: 'doctor',
+    required: true,
   },
   Address: {
     type: String,

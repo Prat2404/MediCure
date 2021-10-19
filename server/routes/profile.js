@@ -13,7 +13,7 @@ const User = require('../schemas/patient');
 // @access  Private
 router.get('/', auth, (req, res) => {
   const errors = {};
-  Profile.findOne({ user: req.user.id })
+  Profile.findOne({ user: req.user })
     .populate('user', ['name', 'email'])
     .then((profile) => {
       if (!profile) {
@@ -50,39 +50,36 @@ router.get('/Email/:email', (req, res) => {
 // @access  Private
 router.post('/', auth, (req, res) => {
   // Check Validation
-  console.log(req.body);
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
   // Get fields
   const profileFields = {};
-  profileFields.user = req.user.id;
+  profileFields.user = req.user;
   if (req.body.Address) profileFields.Address = req.body.Address;
   if (req.body.first_name) profileFields.First_Name = req.body.first_name;
   if (req.body.last_name) profileFields.Last_Name = req.body.last_name;
-  if (req.body.DOB) profileFields.DOB = req.body.DOB;
   if (req.body.City) profileFields.City = req.body.City;
   if (req.body.State) profileFields.State = req.body.State;
   if (req.body.Mobile) profileFields.Phone = req.body.Mobile;
-
-  // Skills - Spilt into array
-  if (typeof req.body.skills !== 'undefined') {
-    profileFields.skills = req.body.skills.split(',');
-  }
-
-  Profile.findOne({ user: req.user.id }).then((profile) => {
+  if (req.body.Pincode) profileFields.Pincode = req.body.Pincode;
+  Profile.findOne({ user: req.user }).then((profile) => {
     if (profile) {
       // Updatene
+      console.log(profile);
       Profile.findOneAndUpdate(
-        { user: req.user.id },
+        { user: req.user },
         { $set: profileFields },
         { new: true }
-      ).then((profile) => res.json(profile));
+      )
+        .then((profile) => res.json(profile))
+        .catch((err) => console.log(err));
     } else {
       // Create
       // Save Profile
-      Profile.findOne({ user: req.user.id }).then((profile) => {
+      Profile.findOne({ user: req.user }).then((profile) => {
         // Save Profile
         new Profile(profileFields).save().then((profile) => res.json(profile));
       });

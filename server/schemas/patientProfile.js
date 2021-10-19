@@ -4,15 +4,13 @@ const UserSchema = mongoose.Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'patient',
+    required: true,
   },
   First_Name: {
     type: String,
   },
   Last_Name: {
     type: String,
-  },
-  DOB: {
-    type: Date,
   },
   Phone: {
     type: String,
@@ -26,7 +24,7 @@ const UserSchema = mongoose.Schema({
   State: {
     type: String,
   },
-  PinCode: {
+  Pincode: {
     type: String,
   },
   Gender: {
