@@ -11,7 +11,6 @@ const jwtSecret = require('../config/keys').jwtSecret;
 router.post(
   '/',
   [
-    check('Name', 'Name is required').not().isEmpty(),
     check('Email', 'Please enter valid email').isEmail(),
     check('Password', 'Please enter a valid password').isLength({ min: 6 }),
   ],
@@ -34,7 +33,6 @@ router.post(
       }
       // Create new patient object
       patient = new Patient({
-        Name: name,
         Email: email,
         Password: password,
       });
