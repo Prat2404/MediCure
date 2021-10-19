@@ -19,12 +19,5 @@ export const getCurrentProfile = () => (dispatch) => {
 // Create Profile
 export const createProfile = (profileData, history) => (dispatch) => {
   console.log('here' + profileData);
-  axios
-    .post('http://localhost:5000/profile', profileData)
-    .then((res) => history.push('/profile'))
-    .catch((err) =>
-      dispatch({
-        payload: err.response.data,
-      })
-    );
+  
 };

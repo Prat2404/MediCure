@@ -14,5 +14,12 @@ const UserSchema = mongoose.Schema({
     required: true,
   },
 });
+//Pincode
+//City
+//State
+//Phone Number
+//Specialisation
+//Degree
+//
 
 module.exports = mongoose.model('doctorProfile', UserSchema);

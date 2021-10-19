@@ -87,10 +87,10 @@ const PatientProfile = (props) => {
                         </div>
                         <div class='col-12 col-md-6'>
                           <div class='form-group'>
+                            <label> First Name </label>
                             <input
                               type='text'
                               name='first_name'
-                              placeholder='first_name'
                               class='form-control'
                               onChange={(e) => {
                                 setfirst_name(e.target.value);
@@ -100,10 +100,10 @@ const PatientProfile = (props) => {
                         </div>
                         <div class='col-12 col-md-6'>
                           <div class='form-group'>
+                            <label> Last Name </label>
                             <input
                               type='text'
                               name='last_name'
-                              placeholder='last_name'
                               class='form-control'
                               onChange={(e) => {
                                 setlast_name(e.target.value);
@@ -114,6 +114,7 @@ const PatientProfile = (props) => {
                         <div class='col-12 col-md-6'>
                           <div class='form-group'>
                             <div class='cal-icon'>
+                              <label> Date of Birth </label>
                               <input
                                 type='date'
                                 class='form-control datetimepicker'
@@ -128,11 +129,11 @@ const PatientProfile = (props) => {
                         </div>
                         <div class='col-12 col-md-6'>
                           <div class='form-group'>
+                            <label> Phone No. </label>
                             <input
                               type='text'
                               class='form-control '
                               name='Mobile'
-                              placeholder='Mobile'
                               onChange={(e) => {
                                 setMobile(e.target.value);
                               }}
@@ -142,11 +143,11 @@ const PatientProfile = (props) => {
 
                         <div class='col-12'>
                           <div class='form-group'>
+                            <label> Address </label>
                             <input
                               type='text'
                               class='form-control '
                               name='Address'
-                              placeholder='Address'
                               onChange={(e) => {
                                 setAddress(e.target.value);
                               }}
@@ -155,11 +156,11 @@ const PatientProfile = (props) => {
                         </div>
                         <div class='col-12 col-md-6'>
                           <div class='form-group'>
+                            <label> City </label>
                             <input
                               type='text'
                               class='form-control '
                               name='City'
-                              placeholder='City'
                               onChange={(e) => {
                                 setCity(e.target.value);
                               }}
@@ -168,11 +169,11 @@ const PatientProfile = (props) => {
                         </div>
                         <div class='col-12 col-md-6'>
                           <div class='form-group'>
+                            <label>State</label>
                             <input
                               type='text'
                               class='form-control '
                               name='State'
-                              placeholder='State'
                               onChange={(e) => {
                                 setState(e.target.value);
                               }}
@@ -182,11 +183,11 @@ const PatientProfile = (props) => {
 
                         <div class='col-12 col-md-6'>
                           <div class='form-group'>
+                            <label>PinCode </label>
                             <input
                               type='text'
                               class='form-control '
                               name='PinCode'
-                              placeholder='PinCode'
                               onChange={(e) => {
                                 SetPinCode(e.target.value);
                               }}

@@ -59,12 +59,12 @@ router.post('/', auth, (req, res) => {
   const profileFields = {};
   profileFields.user = req.user.id;
   if (req.body.Address) profileFields.Address = req.body.Address;
-  if (req.body.first_name) profileFields.first_name = req.body.first_name;
-  if (req.body.last_name) profileFields.last_name = req.body.last_name;
+  if (req.body.first_name) profileFields.First_Name = req.body.first_name;
+  if (req.body.last_name) profileFields.Last_Name = req.body.last_name;
   if (req.body.DOB) profileFields.DOB = req.body.DOB;
   if (req.body.City) profileFields.City = req.body.City;
   if (req.body.State) profileFields.State = req.body.State;
-  if (req.body.Mobile) profileFields.Mobile = req.body.Mobile;
+  if (req.body.Mobile) profileFields.Phone = req.body.Mobile;
 
   // Skills - Spilt into array
   if (typeof req.body.skills !== 'undefined') {
