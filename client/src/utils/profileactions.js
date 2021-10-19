@@ -32,9 +32,6 @@ export const createProfile = (profileData, history) => {
     .then((res) => history.push('/patient/profile'))
     .catch((err) => console.log(err));
 };
-
-//doctor
-//get profile
 export const getCurrentProfileD = () => {
   return axios
     .get('http://localhost:5000/doctor/profile', {
@@ -53,7 +50,7 @@ export const getCurrentProfileD = () => {
 };
 
 // Create Profile
-export const createProfileD = (profileData, history) => {
+export const createProfileD= (profileData, history) => {
   console.log(profileData);
   axios
     .post('http://localhost:5000/doctor/profile', profileData, {
@@ -64,4 +61,27 @@ export const createProfileD = (profileData, history) => {
     })
     .then((res) => history.push('/doctor/profile'))
     .catch((err) => console.log(err));
+};
+export const getAppointments = (doctorId, date) => {
+  console.log(date);
+
+  return axios
+    .post(
+      'http://localhost:5000/patient/find-appointment-availability',
+      {
+        DoctorId: doctorId,
+        date: date,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('token'),
+        },
+      }
+    )
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log(err.msg));
+  // return timeSlots;
 };

@@ -2,14 +2,19 @@ const express = require('express');
 const AppointmentDetails = require('../schemas/appointmentDetails');
 const router = express.Router();
 const TimeSlot = require('../schemas/TimeSlot');
-router.post('/', async (req, res) => {
-  //   console.log(req.body);
-  const date = new Date();
+const auth = require('../middleware/auth');
+router.post('/', auth, async (req, res) => {
+  console.log(req.body);
+  const d = req.body.date;
+  const from = d.split('-');
+  const date = new Date(from[0], from[1] - 1, from[2]);
+  console.log(date);
   const docId = req.body.DoctorId;
   const day = date.getDay();
+
   let timeSlot = await TimeSlot.findOne({ DoctorId: docId });
   if (timeSlot) {
-    // console.log(day);
+    console.log(day);
     const slotTemp = timeSlot.Days;
 
     const slots = slotTemp[day].slots;
