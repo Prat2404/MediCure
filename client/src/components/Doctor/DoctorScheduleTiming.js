@@ -14,16 +14,20 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import defaultValues from './Default/defaultValues';
+
 const getDoctorId = () => {
   const token = localStorage.getItem('token');
   const decode = jwt_decode(token);
   return decode.user.id;
 };
-const variant = ['success', 'primary', 'secondary'];
+const variant = ['success', 'primary', 'error'];
+const status = ['Offline Mode', 'Online Mode', 'Unavailable'];
+
 const DoctorScheduleTiming = () => {
   const [days, setDays] = useState([
     {
@@ -76,17 +80,30 @@ const DoctorScheduleTiming = () => {
                 <Tab label={day.text} />
               ))}
             </Tabs>
-            <ButtonGroup>
-              {days[selectedTab].slots.map((slot) => (
-                <Button
-                  variant='contained'
-                  color={variant[slot.status]}
-                  onClick={console.log('Button Clicked')}
-                >
-                  {slot.startTime}
-                </Button>
-              ))}
-            </ButtonGroup>
+            <List>
+              {days[selectedTab].slots.map((slot) => {
+                // console.log(slot);
+                return (
+                  <ListItem
+                    color={variant[slot.status]}
+                    secondaryAction={
+                      <IconButton
+                        onClick={(e) => {
+                          console.log(slot);
+                        }}
+                      >
+                        <EditOutlinedIcon />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemText
+                      primary={slot.startTime + ' - ' + slot.endTime}
+                      secondary={'Mode: ' + status[slot.status]}
+                    />
+                  </ListItem>
+                );
+              })}
+            </List>
           </Box>
         </CardContent>
       </Card>
