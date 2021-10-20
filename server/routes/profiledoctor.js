@@ -16,9 +16,10 @@ router.get(
   '/',
   auth,
   (req, res) => {
+    console.log(req);
     const errors = {};
-    Profile.findOne({ user: req.user.id })
-      .populate('user', ['name', 'email'])
+    Profile.findOne({ user: req.user })
+      .populate('user', ['email'])
       .then(profile => {
         if (!profile) {
           errors.noprofile = 'There is no profile for this user';
@@ -60,7 +61,7 @@ router.post(
   auth,
   (req, res) => {
 
-    // Check Validation
+   // Check Validation
     // const errors = validationResult(req);
     // if (!errors.isEmpty()) {
     //   return res.status(400).json({ errors: errors.array() });
@@ -68,31 +69,28 @@ router.post(
     // Get fields
     const profileFields = {};
     profileFields.user = req.user;
-    if (req.body.address) profileFields.Address = req.body.Address;
-    if (req.body.gender) profileFields.Gender = req.body.Gender;
-    if (req.body.specialisation) profileFields.Specialisation = req.body.Specialisation;
-    if (req.body.city) profileFields.City = req.body.City;
-    if (req.body.state) profileFields.State = req.body.State;
-    if (req.body.phonenumber) profileFields.PhoneNumber = req.body.PhoneNumber;
-    if (req.body.pincode) profileFields.Pincode = req.body.Pincode;
-    if(req.body.degree) profileFields.Degree = req.body.Degree;
-    // Skills - Spilt into array
-    if (typeof req.body.skills !== 'undefined') {
-      profileFields.skills = req.body.skills.split(',');
-    }
+    if (req.body.address) profileFields.Address = req.body.address;
+    if (req.body.gender) profileFields.Gender = req.body.gender;
+    if (req.body.specialisation) profileFields.Specialisation = req.body.specialisation;
+    if (req.body.City) profileFields.City = req.body.City;
+    if (req.body.State) profileFields.State = req.body.State;
+    if (req.body.PhoneNumber) profileFields.PhoneNumber = req.body.PhoneNumber;
+    if (req.body.Pincode) profileFields.Pincode = req.body.Pincode;
+    if(req.body.Degree) profileFields.Degree = req.body.Degree;
+  console.log(profileFields);
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user }).then(profile => {
       if (profile) {
         // Update
         Profile.findOneAndUpdate(
-          { user: req.user.id },
+          { user: req.user },
           { $set: profileFields },
           { new: true }
         ).then(profile => res.json(profile));
       } else {
         // Create
           // Save Profile
-          Profile.findOne({  user: req.user.id }).then(profile => {
+          Profile.findOne({  user: req.user }).then(profile => {
             // Save Profile
             new Profile(profileFields).save().then(profile => res.json(profile));
           });
@@ -108,8 +106,8 @@ router.delete(
   '/',
   auth,
   (req, res) => {
-    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-      User.findOneAndRemove({ _id: req.user.id }).then(() =>
+    Profile.findOneAndRemove({ user: req.user }).then(() => {
+      User.findOneAndRemove({ _id: req.user }).then(() =>
         res.json({ success: true })
       );
     });

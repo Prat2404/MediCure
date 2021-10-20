@@ -33,9 +33,9 @@ let result;
     var data;
     useEffect(() => {
       getCurrentProfileD().then((data) => {
-        if (data.address) setAddressdef(data.address);
-        if (data.gender) genderdef(data.gender);
-        if (data.specialisation) specialisationdef(data.specialisation);
+        if (data.Address) setAddressdef(data.Address);
+        if (data.Gender) genderdef(data.Gender);
+        if (data.Specialisation) specialisationdef(data.Specialisation);
         if (data.PhoneNumber) setMobiledef(data.PhoneNumber);
         if (data.City) setCitydef(data.City);
         if (data.State) setStatedef(data.State);

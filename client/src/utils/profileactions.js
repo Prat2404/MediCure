@@ -50,7 +50,7 @@ export const getCurrentProfileD = () => {
 };
 
 // Create Profile
-export const createProfileD= (profileData, history) => {
+export const createProfileD = (profileData, history) => {
   console.log(profileData);
   axios
     .post('http://localhost:5000/doctor/profile', profileData, {
