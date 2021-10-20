@@ -56,18 +56,15 @@ router.get('/Email/:email', (req, res) => {
 // @access  Private
 router.post(
   '/',
-  [
-    check('Address', 'Address required').not().isEmpty(),
-    check('Gender', 'Gender required').not().isEmpty(),
-  ],
+  
   auth,
   (req, res) => {
 
     // Check Validation
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   return res.status(400).json({ errors: errors.array() });
+    // }
     // Get fields
     const profileFields = {};
     profileFields.user = req.user;
