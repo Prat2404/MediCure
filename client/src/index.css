@@ -8,3 +8,18 @@
     margin-right: 0%;
     border-color: aqua;
 }
+.last-part{
+    justify-content: center;
+    float: center;  
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.connect-check{
+    justify-content: right;
+    float: right;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.face{
+    width: 4px;
+    height: 4px;
+}
