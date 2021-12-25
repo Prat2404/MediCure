@@ -117,7 +117,7 @@ class Auth {
     if (Auth.loggedIn()) {
       const token = localStorage.getItem('token');
       const decode = jwt_decode(token);
-      console.log(decode);
+
       return decode.user.doctor;
     }
     return false;

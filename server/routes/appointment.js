@@ -4,40 +4,49 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const { jwtSecret } = require('../config/keys');
 const Appointment = require('../schemas/appointmentDetails');
+const auth = require('../middleware/auth');
+
 // @route  POST /login
 // @desc   Test route
 // @access Public
-router.post(
-  '/book',
-  [
-    check('PatientId', 'Patient required').not().isEmpty(),
-    check('DoctorId', 'Doctor required').not().isEmpty(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    try {
-      const patienId = req.body.PatientId;
-      const doctorId = req.body.DoctorId;
-      const appointMode = req.body.AppoinmentMode;
-      const symptoms = req.body.Symptoms;
-      console.log(patienId, doctorId, appointMode, symptoms);
-      const appointment = new Appointment({
-        PatientId: patienId,
-        DoctorId: doctorId,
-        AppoinmentMode: appointMode,
-        Symptoms: symptoms,
-      });
+router.post('/book', auth, async (req, res) => {
+  try {
+    console.log(req.body);
+    const patientId = req.user;
+    const doctorId = req.body.doctorId;
+    const date = req.body.date;
+    const timeSlot = req.body.timeSlot;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const appointMode = timeSlot.status === '0' ? 0 : 1;
 
-      await appointment.save();
-      res.send('Appointment Booked');
-    } catch (error) {
-      res.status(500).send('(Server) appointment insert error');
-    }
+    const appointment = new Appointment({
+      PatientId: patientId,
+      DoctorId: doctorId,
+      AppointmentDate: date,
+      TimeSlot: timeSlot,
+      FirstName: firstName,
+      LastName: lastName,
+      Email: email,
+      Phone: phone,
+      AppointmentMode: appointMode,
+    });
+
+    await appointment.save();
+    console.log('Appointment Booked');
+    res.send('Appointment Booked');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('(Server) appointment insert error');
   }
-);
+});
+router.get('/', auth, async (req, res) => {
+  const patientId = req.user;
+  const appointments = await Appointment.find({ PatientId: patientId });
+  return res.json({ appointments: appointments });
+});
 router.post(
   '/fetch',
   [

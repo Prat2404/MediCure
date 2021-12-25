@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { getAppointments } from '../../utils/profileactions';
+import { getAppointments } from '../../utils/patientActions';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -31,10 +31,17 @@ const PatientFindAppointments = (props) => {
       _id: '',
     },
   ]);
+  const [timeSlot, setTimeSlot] = useState({
+    startTime: '',
+    endTime: '',
+    status: '',
+    _id: '',
+  });
   const { doctorId, name, degree, specialization, location } =
     (props.location && props.location.state) || {};
-  const handleClickOpen = () => {
+  const handleClickOpen = (timeSlot) => {
     setOpen(true);
+    setTimeSlot(timeSlot);
     // history.push({
     //   pathname: '/patient/bookAppointment',
     //   state: { doctorId, name, degree, specialization, location, date },
@@ -103,7 +110,7 @@ const PatientFindAppointments = (props) => {
                   <Button
                     variant='contained'
                     color='success'
-                    onClick={handleClickOpen}
+                    onClick={(e) => handleClickOpen(timeSlot)}
                   >
                     {timeSlot.startTime + ' - ' + timeSlot.endTime}
                   </Button>
@@ -118,7 +125,7 @@ const PatientFindAppointments = (props) => {
                   <Button
                     variant='contained'
                     color='primary'
-                    onClick={handleClickOpen}
+                    onClick={(e) => handleClickOpen(timeSlot)}
                   >
                     {timeSlot.startTime + ' - ' + timeSlot.endTime}
                   </Button>
@@ -130,11 +137,7 @@ const PatientFindAppointments = (props) => {
             {timeSlots.map((timeSlot) => {
               if (timeSlot.status == '2')
                 return (
-                  <Button
-                    variant='contained'
-                    disabled='true'
-                    onClick={handleClickOpen}
-                  >
+                  <Button variant='contained' disabled='true'>
                     {timeSlot.startTime + ' - ' + timeSlot.endTime}
                   </Button>
                 );
@@ -147,6 +150,8 @@ const PatientFindAppointments = (props) => {
                 doctorId={doctorId}
                 name={name}
                 specialization={specialization}
+                date={date}
+                timeSlot={timeSlot}
               />
             </DialogContent>
             <DialogActions>

@@ -36,10 +36,11 @@ app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 // Define routes
 app.use('/login', login);
 app.use('/register', register);
-app.use('/appointment', appoinment);
+
 app.use('/profile', profile);
 app.use('/doctor/login', dlogin);
 app.use('/doctor/register', dregister);
 app.use('/doctor/profile', dprofile);
 app.use('/doctor/scheduleTimings', doctorTimeSlot);
 app.use('/patient/find-appointment-availability', appointmentAvailability);
+app.use('/patient/appointment', appoinment);

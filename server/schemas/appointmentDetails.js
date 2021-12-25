@@ -23,20 +23,28 @@ const UserSchema = mongoose.Schema({
     // required: true,
   },
   TimeSlot: Slot,
+  FirstName: {
+    type: String,
+  },
+  LastName: {
+    type: String,
+  },
+  Email: {
+    type: String,
+  },
+  Phone: {
+    type: String,
+  },
   Recipt: {
     type: String,
     // required: true,
   },
-  AppoinmentMode: {
-    type: String,
+  AppointmentMode: {
+    type: Number,
     // required: true,
     //choice physical or online
   },
   Symptoms: {
-    type: String,
-    // required: true,
-  },
-  PastHistoryOfMedical: {
     type: String,
     // required: true,
   },
