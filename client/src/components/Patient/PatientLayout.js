@@ -5,6 +5,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -62,6 +63,11 @@ const PatientLayout = ({ children }) => {
       text: 'Search Dotors',
       icon: <PersonSearchOutlinedIcon color='secondary' />,
       path: '/patient/searchDoctors',
+    },
+    {
+      text: 'Appointments',
+      icon: <ListAltIcon color='secondary' />,
+      path: '/patient/appointments',
     },
   ];
   return (
