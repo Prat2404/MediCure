@@ -15,22 +15,21 @@ const UserSchema = mongoose.Schema({
   Pincode: {
     type: String,
   },
-  City:{
-  type: String,
-  },
-  State:{
-   type: String,
-  },
-  PhoneNumber:{
+  City: {
     type: String,
   },
-  Specialisation:{
+  State: {
     type: String,
   },
-  Degree:{
+  PhoneNumber: {
+    type: String,
+  },
+  Specialisation: {
+    type: String,
+  },
+  Degree: {
     type: String,
   },
 });
-
 
 module.exports = mongoose.model('doctorProfile', UserSchema);

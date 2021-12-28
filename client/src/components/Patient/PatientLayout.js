@@ -13,6 +13,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
 import Navbar from './PatientNavbar';
+import { red } from '@mui/material/colors';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
   return {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => {
     },
     drawer: {
       width: drawerWidth,
+      background: 'red',
     },
     drawerPaper: {
       width: drawerWidth,
