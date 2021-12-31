@@ -21,13 +21,23 @@ router.post('/', auth, async (req, res) => {
     // console.log(slots);
     let bookedSlots = await AppointmentDetails.find({
       DoctorId: docId,
-      AppointmentDate: date,
+      AppointmentDate: d,
     });
+    // console.log(bookedSlots);
     for (let index = 0; index < bookedSlots.length; index++) {
-      const i = slots.indexOf(bookedSlots[index].TimeSlot);
-      if (i > -1) {
-        slots.status = '2';
+      for (let i = 0; i < slots.length; i++) {
+        // console.log(slots[i]._id, bookedSlots[index].TimeSlot._id);
+        if (slots[i].startTime == bookedSlots[index].TimeSlot.startTime) {
+          // console.log('hello');
+          slots[i].status = '2';
+          break;
+        }
       }
+      // const i = slots.indexOf(bookedSlots[index].TimeSlot);
+      // console.log(i);
+      // if (i > -1) {
+      //   slots[i].status = '2';
+      // }
     }
     return res.json(slots);
   } else {

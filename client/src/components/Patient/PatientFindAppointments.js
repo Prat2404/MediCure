@@ -21,14 +21,23 @@ const PatientFindAppointments = (props) => {
   const [date, setDate] = useState('');
   const [buttonDis, setbuttondis] = useState(false);
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [doctorId, setId] = useState('');
+  const [specialization, setSpecialization] = useState('');
+
   const history = useHistory();
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setName(props.location.state.user.Name);
+    setId(props.location.state.user._id);
+    // console.log(props.location.state.user._id);
+    setSpecialization(props.location.state.Specialisation);
+  }, []);
   const [timeSlots, setTimeSlots] = useState([
     {
       startTime: '',
       endTime: '',
       status: '',
-      _id: '',
+      _id: new Object(''),
     },
   ]);
   const [timeSlot, setTimeSlot] = useState({
@@ -37,8 +46,9 @@ const PatientFindAppointments = (props) => {
     status: '',
     _id: '',
   });
-  const { doctorId, name, degree, specialization, location } =
-    (props.location && props.location.state) || {};
+  // const { doctorId, name, degree, specialization, location } =
+  //   (props.location && props.location.state) || {};
+
   const handleClickOpen = (timeSlot) => {
     setOpen(true);
     setTimeSlot(timeSlot);
