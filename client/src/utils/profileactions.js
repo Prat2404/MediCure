@@ -62,3 +62,39 @@ export const createProfileD = (profileData, history) => {
     .then((res) => history.push('/doctor/profile'))
     .catch((err) => console.log(err));
 };
+// get prescription
+export const getpresctiption = () => {
+  return axios
+    .get('http://localhost:5000/patient/prescription', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then(
+      (res) => {
+        console.log(res);
+        return res.data;
+      }
+      // dispatch({
+      //   payload: res.data,
+      // })
+    );
+};
+export const downloadprescription = (index) => {
+  console.log(index);
+  // return axios
+  //   .get('http://localhost:5000/patient/prescription', {
+  //     headers: {
+  //       'x-access-token': localStorage.getItem('token'),
+  //     },
+  //   })
+  //   .then(
+  //     (res) => {
+  //       console.log(res);
+  //       return res.data;
+  //     }
+  //     // dispatch({
+  //     //   payload: res.data,
+  //     // })
+  //   );
+};

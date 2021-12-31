@@ -32,11 +32,19 @@ const UserSchema = mongoose.Schema({
   },
   Prescription: [
     {
-      Timings: {
+      Date: {
         type: Date,
         required: true,
       },
-      MedicineDetails: {
+      Doctor: {
+        type: String,
+        required: true,
+      },
+      patient: {
+        type: String,
+        required: true,
+      },
+      url: {
         type: String,
         required: true,
       },

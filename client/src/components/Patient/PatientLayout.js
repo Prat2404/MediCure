@@ -12,6 +12,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
+import MedicationIcon from '@mui/icons-material/Medication';
 import Navbar from './PatientNavbar';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
@@ -60,7 +61,12 @@ const PatientLayout = ({ children }) => {
       path: '/patient/home',
     },
     {
-      text: 'Search Dotors',
+      text: 'Medications',
+      icon: <MedicationIcon color='secondary' />,
+      path: '/patient/medications',
+    },
+    {
+      text: 'Search Doctors',
       icon: <PersonSearchOutlinedIcon color='secondary' />,
       path: '/patient/searchDoctors',
     },

@@ -26,6 +26,7 @@ import PatientFindAppointments from './Patient/PatientFindAppointments';
 import BookAppointment from './Patient/BookAppointment';
 import PatientAppointments from './Patient/PatientAppointments';
 import PatientEditAppointments from './Patient/PatientEditAppointments';
+import Medications from './Patient/Medications';
 const AuthRouter = () => {
   return (
     <Router>
@@ -72,6 +73,11 @@ const AuthRouter = () => {
           exact
           path='/patient/appointments/view'
           component={PatientEditAppointments}
+        />
+        <PrivatePatientRoute
+          exact
+          path='/patient/medications'
+          component={Medications}
         />
         {/* //doctor routes */}
         <Route exact path='/doctor/' component={DoctorLogin} />
