@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
 const Slot = mongoose.Schema({
   startTime: String,
   endTime: String,
@@ -6,11 +8,14 @@ const Slot = mongoose.Schema({
 });
 const UserSchema = mongoose.Schema({
   PatientId: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'patient',
     required: true,
   },
+
   DoctorId: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'doctor',
     required: true,
   },
   BookingDate: {
@@ -23,20 +28,28 @@ const UserSchema = mongoose.Schema({
     // required: true,
   },
   TimeSlot: Slot,
+  FirstName: {
+    type: String,
+  },
+  LastName: {
+    type: String,
+  },
+  Email: {
+    type: String,
+  },
+  Phone: {
+    type: String,
+  },
   Recipt: {
     type: String,
     // required: true,
   },
-  AppoinmentMode: {
-    type: String,
+  AppointmentMode: {
+    type: Number,
     // required: true,
     //choice physical or online
   },
   Symptoms: {
-    type: String,
-    // required: true,
-  },
-  PastHistoryOfMedical: {
     type: String,
     // required: true,
   },

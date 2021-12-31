@@ -6,21 +6,33 @@ const UserSchema = mongoose.Schema({
     ref: 'doctor',
     required: true,
   },
+  Name: {
+    type: String,
+  },
   Address: {
     type: String,
-    required: true,
   },
   Gender: {
     type: String,
-    required: true,
+  },
+  Pincode: {
+    type: String,
+  },
+  City: {
+    type: String,
+  },
+  State: {
+    type: String,
+  },
+  PhoneNumber: {
+    type: String,
+  },
+  Specialisation: {
+    type: String,
+  },
+  Degree: {
+    type: String,
   },
 });
-//Pincode
-//City
-//State
-//Phone Number
-//Specialisation
-//Degree
-//
 
 module.exports = mongoose.model('doctorProfile', UserSchema);

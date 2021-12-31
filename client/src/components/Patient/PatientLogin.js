@@ -22,6 +22,12 @@ const PatientLogin = (props) => {
   const [password, setPassword] = useState('');
 
   const history = useHistory();
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      if (Auth.isdoctor()) history.push('/doctor/home');
+      else history.push('/patient/home');
+    }
+  }, []);
   const doLogin = async (e) => {
     e.preventDefault();
 

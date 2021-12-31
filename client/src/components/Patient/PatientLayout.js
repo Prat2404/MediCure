@@ -5,13 +5,16 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { useHistory, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
+import MedicationIcon from '@mui/icons-material/Medication';
 import Navbar from './PatientNavbar';
+import { red } from '@mui/material/colors';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
   return {
@@ -21,6 +24,7 @@ const useStyles = makeStyles((theme) => {
     },
     drawer: {
       width: drawerWidth,
+      background: 'red',
     },
     drawerPaper: {
       width: drawerWidth,
@@ -59,9 +63,19 @@ const PatientLayout = ({ children }) => {
       path: '/patient/home',
     },
     {
-      text: 'Search Dotors',
+      text: 'Medications',
+      icon: <MedicationIcon color='secondary' />,
+      path: '/patient/medications',
+    },
+    {
+      text: 'Search Doctors',
       icon: <PersonSearchOutlinedIcon color='secondary' />,
       path: '/patient/searchDoctors',
+    },
+    {
+      text: 'Appointments',
+      icon: <ListAltIcon color='secondary' />,
+      path: '/patient/appointments',
     },
   ];
   return (
