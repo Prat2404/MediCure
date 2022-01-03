@@ -20,8 +20,8 @@ const PatientAppointments = () => {
         _id: new Object(),
         Name: '',
       },
-      BookingDate: new Date(),
-      AppointmentDate: new Date(),
+      BookingDate: '',
+      AppointmentDate: '',
       TimeSlot: {
         startTime: '',
         endTime: '',
@@ -64,10 +64,14 @@ const PatientAppointments = () => {
               return (
                 <TableRow>
                   <TableCell>{appointment.DoctorId.Name}</TableCell>
-                  <TableCell>Date format bug</TableCell>
-                  <TableCell>Date format bug</TableCell>
-                  {/* <TableCell>{appointment.AppointmentDate}</TableCell>
-                  <TableCell>{appointment.BookingDate}</TableCell> */}
+                  {/* <TableCell>Date format bug</TableCell>
+                  <TableCell>Date format bug</TableCell> */}
+                  <TableCell>
+                    {appointment.AppointmentDate.substring(0, 10)}
+                  </TableCell>
+                  <TableCell>
+                    {appointment.BookingDate.substring(0, 10)}
+                  </TableCell>
                   <TableCell>
                     {appointment.FirstName + ' ' + appointment.LastName}
                   </TableCell>
