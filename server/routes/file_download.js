@@ -2,7 +2,7 @@ const fs = require('fs');
 const baseUrl = 'http://localhost:5000/uploads/';
 
 const getListFiles = (req, res) => {
-  const directoryPath = 'D:\\project\\MediCure\\server\\uploads\\';
+  const directoryPath = process.env.DOWNLOAD_PATH;
 
   fs.readdir(directoryPath, function (err, files) {
     if (err) {
@@ -26,7 +26,7 @@ const getListFiles = (req, res) => {
 
 const download = (req, res) => {
   const fileName = req.params.name;
-  const directoryPath = 'D:\\project\\MediCure\\server\\uploads\\';
+  const directoryPath = process.env.DOWNLOAD_PATH;
 
   res.download(directoryPath + fileName, fileName, (err) => {
     if (err) {
