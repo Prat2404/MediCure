@@ -35,6 +35,8 @@ const PatientAppointments = () => {
       Recipt: '',
       AppointmentMode: 0,
       Symptoms: '',
+      Age: '',
+      Sex: '',
       _id: new Object(''),
     },
   ]);

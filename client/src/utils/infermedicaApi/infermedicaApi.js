@@ -56,6 +56,7 @@ export const inferSearch = async (
   max_results,
   interviewId
 ) => {
+  console.log(phrase, age, sex, max_results, interviewId);
   const res = await axios.get(
     api +
       'search?' +
@@ -92,7 +93,7 @@ export const inferParse = async (body, interviewId) => {
   });
   return res.data;
 };
-export const inferConditionbyId = async (condition, age) => {
+export const inferConditionbyId = async (condition, age, interviewId) => {
   const res = await axios.get(
     api + 'conditions/' + condition + '?age.value=' + age,
     {
@@ -107,7 +108,7 @@ export const inferConditionbyId = async (condition, age) => {
   );
   return res.data;
 };
-export const inferSymptombyId = async (symptom, age) => {
+export const inferSymptombyId = async (symptom, age, interviewId) => {
   const res = await axios.get(
     api + 'symptoms/' + symptom + '?age.value=' + age,
     {

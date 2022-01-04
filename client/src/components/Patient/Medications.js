@@ -89,7 +89,8 @@ const Medications = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [value, setValue] = React.useState(null);
-  useEffect(() => {
+  // @TODO first render
+  useEffect(async () => {
     getpresctiption().then((data) => {
       for (let i = 0; i < data.length; i++) {
         //  console.log(i);
@@ -107,7 +108,7 @@ const Medications = (props) => {
       setOpen(true);
       setOpen(false);
     });
-  }, [localStorage.getItem('token')]);
+  }, []);
   const Upload = async (e) => {
     e.preventDefault();
 

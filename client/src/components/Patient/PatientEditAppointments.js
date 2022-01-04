@@ -7,7 +7,7 @@ import axios from 'axios';
 const PatientEditAppointments = (props) => {
   const location = useLocation();
   const appointment = location.state.detail;
-  const [preliminary, setPreliminary] = useState(true);
+  const [preliminary, setPreliminary] = useState(false);
   useEffect(() => {
     // getPremil
     console.log(appointment);
