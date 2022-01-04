@@ -89,8 +89,8 @@ const Medications = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [value, setValue] = React.useState(null);
-  // @TODO first render
-  useEffect(async () => {
+  var loading = false;
+  useEffect(() => {
     getpresctiption().then((data) => {
       for (let i = 0; i < data.length; i++) {
         //  console.log(i);
@@ -104,11 +104,10 @@ const Medications = (props) => {
           )
         );
       }
-      setRows(rows);
-      setOpen(true);
-      setOpen(false);
+      loading = true;
+      setRows([...rows]);
     });
-  }, []);
+  }, [loading]);
   const Upload = async (e) => {
     e.preventDefault();
 

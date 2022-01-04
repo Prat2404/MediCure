@@ -53,7 +53,7 @@ const PatientSearchDoctor = () => {
         {doctors.map((doctor) => (
           <ListItem>
             <Card className={classes.listCard}>
-              <CardHeader title={doctor.user.Name} />
+              <CardHeader title={doctor.Name} />
               <CardContent>{doctor.Specialisation}</CardContent>
               <CardActions>
                 <Button
