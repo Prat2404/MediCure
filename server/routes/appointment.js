@@ -22,6 +22,8 @@ router.post('/book', auth, async (req, res) => {
     const lastName = req.body.lastName;
     const email = req.body.email;
     const phone = req.body.phone;
+    const age = req.body.age;
+    const sex = req.body.sex;
     const appointMode = timeSlot.status === '0' ? 0 : 1;
 
     const appointment = new Appointment({
@@ -34,6 +36,8 @@ router.post('/book', auth, async (req, res) => {
       Email: email,
       Phone: phone,
       AppointmentMode: appointMode,
+      Age: age,
+      Sex: sex,
     });
 
     await appointment.save();

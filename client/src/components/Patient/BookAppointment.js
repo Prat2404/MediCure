@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Container, Typography, Button } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Button,
+  Slider,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from '@mui/material';
 import { useHistory } from 'react-router';
 import { bookAppoinment } from '../../utils/patientActions';
+
 const BookAppointment = (props) => {
   const history = useHistory();
   const { doctorId, name, specialization, date, timeSlot, location } =
@@ -12,6 +22,8 @@ const BookAppointment = (props) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [age, setAge] = useState(0);
+  const [sex, setSex] = useState('');
   // const [timeSlot, setTimeSlot] = useState({
   //   startTime: '',
   //   endTime: '',
@@ -30,6 +42,8 @@ const BookAppointment = (props) => {
       lastName,
       email,
       phone,
+      age,
+      sex,
     };
     // console.log(appointmentData);
     bookAppoinment(appointmentData, history);
@@ -135,6 +149,43 @@ const BookAppointment = (props) => {
           required
           name='phone'
           onChange={(e) => setPhone(e.target.value)}
+        />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          'flex-direction': 'row',
+          'justify-content': 'center',
+        }}
+      >
+        <FormControl variant='standard' sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id='demo-simple-select-standard-label'>Sex</InputLabel>
+          <Select
+            labelId='demo-simple-select-standard-label'
+            id='demo-simple-select-standard'
+            value={sex}
+            onChange={(e) => setSex(e.target.value)}
+            label='Sex'
+          >
+            <MenuItem value={'male'}>Male</MenuItem>
+            <MenuItem value={'female'}>Female</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          'flex-direction': 'row',
+          'justify-content': 'center',
+        }}
+      >
+        <Typography> Age </Typography>
+        <Slider
+          defaultValue={50}
+          aria-label='Default'
+          valueLabelDisplay='auto'
+          onChange={(e) => setAge(e.target.value)}
         />
       </Box>
       <Box
