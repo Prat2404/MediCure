@@ -9,18 +9,16 @@ const PreliminaryDiagnosis = mongoose.Schema({
   },
   Diagnosis: {
     question: {
-      type: {
-        type: String,
-      },
-      text: String,
+      type: { type: String },
+      text: { type: String },
       items: [
         {
-          id: String,
-          name: String,
+          id: { type: String },
+          name: { type: String },
           choices: [
             {
-              id: String,
-              label: String,
+              id: { type: String },
+              label: { type: String },
             },
           ],
         },
@@ -29,48 +27,48 @@ const PreliminaryDiagnosis = mongoose.Schema({
     },
     conditions: [
       {
-        id: String,
-        name: String,
-        common_name: String,
+        id: { type: String },
+        name: { type: String },
+        common_name: { type: String },
         probability: Number,
       },
     ],
     extras: {},
-    should_stop: true,
+    should_stop: { type: Boolean },
   },
   Triage: {
-    triage_level: emergency_ambulance,
+    triage_level: { type: String },
     serious: [
       {
-        id: String,
-        name: String,
-        common_name: String,
-        is_emergency: true,
+        id: { type: String },
+        name: { type: String },
+        common_name: { type: String },
+        is_emergency: { type: Boolean },
       },
     ],
-    root_cause: String,
-    teleconsultation_applicable: true,
+    root_cause: { type: String },
+    teleconsultation_applicable: { type: Boolean },
   },
   Explain: {
     supporting_evidence: [
       {
-        id: String,
-        name: String,
-        common_name: String,
+        id: { type: String },
+        name: { type: String },
+        common_name: { type: String },
       },
     ],
     conflicting_evidence: [
       {
-        id: String,
-        name: String,
-        common_name: String,
+        id: { type: String },
+        name: { type: String },
+        common_name: { type: String },
       },
     ],
     unconfirmed_evidence: [
       {
-        id: String,
-        name: String,
-        common_name: String,
+        id: { type: String },
+        name: { type: String },
+        common_name: { type: String },
       },
     ],
   },

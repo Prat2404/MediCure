@@ -18,6 +18,7 @@ const appointmentAvailability = require('./routes/appointmentAvailability');
 const prescription = require('./routes/prescriptions');
 const filedown = require('./routes/file_download');
 const auth = require('./middleware/auth');
+const prediagnosis = require('./routes/preliminaryDiagnosis');
 //const filelist = require('./routes/file_list');
 const app = express();
 
@@ -70,3 +71,4 @@ app.use('/doctor/profile', dprofile);
 app.use('/doctor/scheduleTimings', doctorTimeSlot);
 app.use('/patient/find-appointment-availability', appointmentAvailability);
 app.use('/patient/appointment', appoinment);
+app.use('/patient/checkpreliminaryDiagnosis', prediagnosis);
