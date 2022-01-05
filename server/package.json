@@ -4,7 +4,7 @@
   "description": "Avishkar 2021 ( Webster) Project",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "nodemon server",
     "server": "nodemon server"
   },
   "repository": {

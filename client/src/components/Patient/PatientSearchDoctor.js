@@ -9,14 +9,27 @@ import {
   ListItem,
   ListItemText,
   Typography,
+  Stack,
+  Paper,
+  styled,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getDoctorsList } from '../../utils/patientActions';
 const useStyles = makeStyles({
-  listCard: {},
+  listCard: {
+    display: 'block',
+    width: '200px',
+    height: '100%',
+  },
 });
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body0,
+  padding: theme.spacing(0, 0, 0, 0),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 const PatientSearchDoctor = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -45,13 +58,18 @@ const PatientSearchDoctor = () => {
   }, []);
 
   return (
-    <div className='continer'>
+    <div className='container'>
       <Card>
         <CardHeader title='Filter'></CardHeader>
       </Card>
-      <List>
+      <Stack
+        direction='row'
+        justifyContent='flex-start'
+        alignItems='flex-start'
+        spacing={2.5}
+      >
         {doctors.map((doctor) => (
-          <ListItem>
+          <Item>
             <Card className={classes.listCard}>
               <CardHeader title={doctor.Name} />
               <CardContent>{doctor.Specialisation}</CardContent>
@@ -70,9 +88,9 @@ const PatientSearchDoctor = () => {
                 </Button>
               </CardActions>
             </Card>
-          </ListItem>
+          </Item>
         ))}
-      </List>
+      </Stack>
     </div>
   );
 };

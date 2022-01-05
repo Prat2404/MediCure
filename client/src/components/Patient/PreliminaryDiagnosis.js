@@ -176,10 +176,10 @@ const PreliminaryDiagnosis = (props) => {
   ]);
   const [evidence, setEvidence] = useState([]);
   const [selectedSymptoms, setSelectedSymptoms] = useState([
-    {
-      id: '',
-      label: '',
-    },
+    // {
+    //   id: '',
+    //   label: '',
+    // },
   ]);
   const searchItems = (symptomFilter) => {
     const filterData = symptoms.filter((item) => {
@@ -506,6 +506,13 @@ const PreliminaryDiagnosis = (props) => {
                                   setSelectedSymptoms((selectedSymptoms) => [
                                     ...selectedSymptoms,
                                     item,
+                                  ]);
+                                  setSymptonFilter('');
+                                  setFilteredSymptom([
+                                    {
+                                      id: '',
+                                      label: '',
+                                    },
                                   ]);
                                   // console.log(selectedSymptoms);
                                 }}
