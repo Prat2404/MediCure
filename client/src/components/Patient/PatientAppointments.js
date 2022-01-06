@@ -14,6 +14,7 @@ const PatientAppointments = () => {
   const [appointments, setAppointments] = useState([
     {
       PatientId: '',
+      DoctorName: '',
       DoctorId: {
         _id: new Object(),
         Name: '',
@@ -63,7 +64,7 @@ const PatientAppointments = () => {
             {appointments.map((appointment) => {
               return (
                 <TableRow>
-                  <TableCell>{appointment.DoctorId.Name}</TableCell>
+                  <TableCell>{appointment.DoctorName}</TableCell>
                   {/* <TableCell>Date format bug</TableCell>
                   <TableCell>Date format bug</TableCell> */}
                   <TableCell>

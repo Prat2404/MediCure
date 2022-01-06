@@ -25,10 +25,12 @@ router.post('/book', auth, async (req, res) => {
     const age = req.body.age;
     const sex = req.body.sex;
     const appointMode = timeSlot.status === '0' ? 0 : 1;
+    const name = req.body.name;
 
     const appointment = new Appointment({
       PatientId: patientId,
       DoctorId: doctorId,
+      DoctorName: name,
       AppointmentDate: date,
       TimeSlot: timeSlot,
       FirstName: firstName,
