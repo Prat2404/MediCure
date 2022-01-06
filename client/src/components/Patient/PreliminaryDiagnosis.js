@@ -1,35 +1,31 @@
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
-  Container,
-  Typography,
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
-  Button,
-  CardActions,
-  FormGroup,
-  FormControlLabel,
   Checkbox,
+  Container,
   FormControl,
+  FormControlLabel,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
   Radio,
   RadioGroup,
-  TableRow,
+  Table,
   TableCell,
   TableContainer,
   TableHead,
-  Table,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemButton,
-  IconButton,
+  TableRow,
+  Typography,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from '@mui/material/Paper';
-import Symptoms from './Symptoms';
-import React, { useState, useEffect, Fragment } from 'react';
 import { makeStyles } from '@mui/styles';
-import RiskFactors from './RiskFactors';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   inferDiagnosis,
   inferSearch,
@@ -454,7 +450,7 @@ const PreliminaryDiagnosis = (props) => {
           </div>
         </Container>
       );
-      break;
+
     case 2:
       return (
         <Container>
@@ -535,7 +531,7 @@ const PreliminaryDiagnosis = (props) => {
           </div>
         </Container>
       );
-      break;
+
     case 3:
       return (
         <Container>
@@ -630,7 +626,7 @@ const PreliminaryDiagnosis = (props) => {
           </div>
         </Container>
       );
-      break;
+
     case 4:
       return (
         <Container>
@@ -743,7 +739,7 @@ const PreliminaryDiagnosis = (props) => {
           </div>
         </Container>
       );
-      break;
+
     //suggest more symptoms based on the symptoms before
     case 5:
       return (
@@ -811,7 +807,7 @@ const PreliminaryDiagnosis = (props) => {
           </div>
         </Container>
       );
-      break;
+
     //daignosis part starts
     case 6:
       return (
@@ -957,10 +953,9 @@ const PreliminaryDiagnosis = (props) => {
           </div>
         </Container>
       );
-      break;
+
     default:
       return <Fragment>Hello</Fragment>;
-      break;
   }
 };
 
