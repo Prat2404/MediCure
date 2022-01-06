@@ -52,11 +52,19 @@ const UserSchema = mongoose.Schema({
   ],
   LabReport: [
     {
-      Timings: {
+      Date: {
         type: Date,
         required: true,
       },
-      LabResult: {
+      Lab: {
+        type: String,
+        required: true,
+      },
+      patient: {
+        type: String,
+        required: true,
+      },
+      url: {
         type: String,
         required: true,
       },

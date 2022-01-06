@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import Auth from '../../utils/Auth';
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>

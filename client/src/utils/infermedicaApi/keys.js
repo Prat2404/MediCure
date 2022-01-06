@@ -1,5 +1,8 @@
+//import { env } from 'process';
+require('dotenv').config();
+
 module.exports = {
-  app_id: '8e5069c9',
-  app_key: 'd17d5853cf9403c9aa4b2f67f30c5cf4',
-  api: 'https://api.infermedica.com/v3/',
+  app_id: process.env.REACT_APP_APP_ID,
+  app_key: process.env.REACT_APP_APP_KEY,
+  api: process.env.REACT_APP_API,
 };

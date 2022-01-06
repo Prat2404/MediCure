@@ -1,32 +1,27 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import Logout from '../utils/logout';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from '../landing';
-import Chat from './chat/chat';
-
-import PatientLogin from './Patient/PatientLogin';
-import PatientRegister from './Patient/PatientRegister';
-import PatientHome from './Patient/PatientHome';
-import PatientLanding from './Patient/PatientLanding';
-
-import DoctorRegister from './Doctor/DoctorRegister';
-import DoctorLogin from './Doctor/DoctorLogin';
-import DoctorHome from './Doctor/DoctorHome';
-import DoctorLanding from './Doctor/DoctorLanding';
-
-import PrivateRoute from '../utils/PrivateRoute';
-import PrivatePatientRoute from '../utils/PrivatePatientRoute';
+import Logout from '../utils/logout';
 import PrivateDoctorRoute from '../utils/PrivateDoctorRoute';
-import PatientProfile from './Patient/PatientProfile';
+import PrivatePatientRoute from '../utils/PrivatePatientRoute';
+import PrivateRoute from '../utils/PrivateRoute';
+import Chat from './chat/chat';
+import DoctorHome from './Doctor/DoctorHome';
+import DoctorLogin from './Doctor/DoctorLogin';
 import DoctorProfile from './Doctor/DoctorProfile';
+import DoctorRegister from './Doctor/DoctorRegister';
 import DoctorScheduleTiming from './Doctor/DoctorScheduleTiming';
-import PatientSearchDoctor from './Patient/PatientSearchDoctor';
-import PatientFindAppointments from './Patient/PatientFindAppointments';
 import BookAppointment from './Patient/BookAppointment';
+import Medications from './Patient/Medications';
 import PatientAppointments from './Patient/PatientAppointments';
 import PatientEditAppointments from './Patient/PatientEditAppointments';
-import Medications from './Patient/Medications';
+import PatientFindAppointments from './Patient/PatientFindAppointments';
+import PatientHome from './Patient/PatientHome';
+import PatientLogin from './Patient/PatientLogin';
+import PatientProfile from './Patient/PatientProfile';
+import PatientRegister from './Patient/PatientRegister';
+import PatientSearchDoctor from './Patient/PatientSearchDoctor';
+
 const AuthRouter = () => {
   return (
     <Router>

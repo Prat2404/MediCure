@@ -1,20 +1,18 @@
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import MedicationIcon from '@mui/icons-material/Medication';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
 import { Avatar, Drawer, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import React from 'react';
+import AppBar from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import { makeStyles } from '@mui/styles';
+import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
-import MedicationIcon from '@mui/icons-material/Medication';
 import Navbar from './PatientNavbar';
-import { red } from '@mui/material/colors';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
   return {

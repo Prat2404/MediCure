@@ -1,11 +1,11 @@
 import { Container, TextField, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 import { makeStyles } from '@mui/styles';
-
-import React, { useState, useEffect, Fragment } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Auth from '../../utils/Auth';
+
 const useStyle = makeStyles({
   field: {
     marginTop: 20,

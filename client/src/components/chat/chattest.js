@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
 import Peer from 'peerjs';
+import React, { useEffect, useRef } from 'react';
 const Chat = () => {
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);

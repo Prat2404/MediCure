@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
 import DoctorLayout from '../components/Doctor/DoctorLayout';
 import Auth from './Auth';
 

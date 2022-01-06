@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import {
-  Container,
-  Typography,
   Button,
-  Slider,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
-  InputLabel,
-  FormControl,
+  Slider,
+  Typography,
 } from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { bookAppoinment } from '../../utils/patientActions';
 

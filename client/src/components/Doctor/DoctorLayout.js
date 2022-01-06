@@ -1,16 +1,15 @@
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { Avatar, CssBaseline, Drawer, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import React from 'react';
+import AppBar from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import { makeStyles } from '@mui/styles';
+import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Navbar from './DcotorNavbar';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {

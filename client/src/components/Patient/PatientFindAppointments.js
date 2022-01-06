@@ -27,7 +27,7 @@ const PatientFindAppointments = (props) => {
 
   const history = useHistory();
   useEffect(() => {
-    setName(props.location.state.user.Name);
+    setName(props.location.state.Name);
     setId(props.location.state.user._id);
     // console.log(props.location.state.user._id);
     setSpecialization(props.location.state.Specialisation);

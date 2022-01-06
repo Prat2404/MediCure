@@ -1,9 +1,7 @@
-import React, { Fragment } from 'react';
-import { useEffect, useState } from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import PreliminaryDiagnosis from './PreliminaryDiagnosis';
-import axios from 'axios';
 const PatientEditAppointments = (props) => {
   const location = useLocation();
   const appointment = location.state.detail;

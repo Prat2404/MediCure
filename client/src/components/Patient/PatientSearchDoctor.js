@@ -4,17 +4,12 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Stack,
   Paper,
+  Stack,
   styled,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getDoctorsList } from '../../utils/patientActions';
 const useStyles = makeStyles({
