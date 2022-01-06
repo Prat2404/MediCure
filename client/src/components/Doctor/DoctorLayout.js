@@ -7,6 +7,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -62,6 +63,11 @@ const DoctorLayout = ({ children }) => {
       icon: <HourglassBottomIcon color='secondary' />,
       path: '/doctor/scheduleTimings',
     },
+    {
+      text: 'Appointments',
+      icon: <ListAltIcon color='secondary' />,
+      path: '/doctor/appointments',
+    },
   ];
   return (
     <div className={classes.root}>
@@ -103,14 +109,6 @@ const DoctorLayout = ({ children }) => {
           ))}
         </List>
         {/* Doctor Appoint and other  */}
-        <List>
-          <ListItem button>
-            <ListItemText primary='Find Doctors' />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary='Appointment' />
-          </ListItem>
-        </List>
       </Drawer>
       <div className={classes.pages}>
         <div className={classes.toolbar}></div>

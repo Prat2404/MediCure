@@ -11,6 +11,7 @@ import DoctorLogin from './Doctor/DoctorLogin';
 import DoctorProfile from './Doctor/DoctorProfile';
 import DoctorRegister from './Doctor/DoctorRegister';
 import DoctorScheduleTiming from './Doctor/DoctorScheduleTiming';
+import DoctorAppointments from './Doctor/DoctorAppointments';
 import BookAppointment from './Patient/BookAppointment';
 import Medications from './Patient/Medications';
 import PatientAppointments from './Patient/PatientAppointments';
@@ -78,6 +79,11 @@ const AuthRouter = () => {
         <Route exact path='/doctor/' component={DoctorLogin} />
         <Route exact path='/doctor/register' component={DoctorRegister} />
         <Route exact path='/doctor/login' component={DoctorLogin} />
+        <PrivateDoctorRoute
+          exact
+          path='/doctor/appointments'
+          component={DoctorAppointments}
+        />
         <PrivateDoctorRoute exact path='/doctor/home' component={DoctorHome} />
         <PrivateDoctorRoute
           exact
