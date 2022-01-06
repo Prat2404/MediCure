@@ -1,25 +1,29 @@
-#root{
-    display: block;
-    margin: 0%;
-    padding: 0%;
-    padding-left:0%;
-    padding-right: 0%;
-    margin-left: 0%;
-    margin-right: 0%;
-    border-color: aqua;
+#root {
+  display: block;
+  margin: 0%;
+  padding: 0%;
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
+  border-color: aqua;
+  height: 100%;
 }
-.last-part{
-    justify-content: center;
-    float: center;  
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-
+.last-part {
+  justify-content: center;
+  float: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.connect-check{
-    justify-content: right;
-    float: right;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.connect-check {
+  justify-content: right;
+  float: right;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.face{
-    width: 4px;
-    height: 4px;
+.face {
+  width: 4px;
+  height: 4px;
+}
+html,
+body {
+  height: 100%;
 }

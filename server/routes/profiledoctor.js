@@ -62,7 +62,7 @@ router.post(
     // Get fields
     const profileFields = {};
     profileFields.user = req.user;
-    if (req.body.name) profileFields.name = req.body.name;
+    if (req.body.name) profileFields.Name = req.body.name;
     if (req.body.address) profileFields.Address = req.body.address;
     if (req.body.gender) profileFields.Gender = req.body.gender;
     if (req.body.specialisation)

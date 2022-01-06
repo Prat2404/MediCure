@@ -8,9 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { getAppointDetails } from '../../utils/patientActions';
+import { getAppointDetails } from '../../utils/DoctorActions';
 
-const PatientAppointments = () => {
+const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([
     {
       PatientId: '',
@@ -52,11 +52,10 @@ const PatientAppointments = () => {
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
             <TableRow>
-              <TableCell>Doctor</TableCell>
-              <TableCell>App Date</TableCell>
-              <TableCell>Booking Date</TableCell>
+              <TableCell>Appointment Date</TableCell>
+              <TableCell>Time Slot</TableCell>
               <TableCell>Patient Name</TableCell>
-              <TableCell>AppointmentMode</TableCell>
+              <TableCell>Mode</TableCell>
               <TableCell align='center'>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -64,14 +63,13 @@ const PatientAppointments = () => {
             {appointments.map((appointment) => {
               return (
                 <TableRow>
-                  <TableCell>{appointment.DoctorName}</TableCell>
-                  {/* <TableCell>Date format bug</TableCell>
-                  <TableCell>Date format bug</TableCell> */}
                   <TableCell>
                     {appointment.AppointmentDate.substring(0, 10)}
                   </TableCell>
                   <TableCell>
-                    {appointment.BookingDate.substring(0, 10)}
+                    {appointment.TimeSlot.startTime +
+                      ' - ' +
+                      appointment.TimeSlot.endTime}
                   </TableCell>
                   <TableCell>
                     {appointment.FirstName + ' ' + appointment.LastName}
@@ -82,11 +80,12 @@ const PatientAppointments = () => {
                   {appointment.AppointmentMode == 1 && (
                     <TableCell>Offline</TableCell>
                   )}
+
                   <TableCell align='center'>
                     <Button
                       onClick={(e) => {
                         history.push({
-                          pathname: '/patient/appointments/view',
+                          pathname: '/doctor/appointments/view',
                           state: { detail: appointment },
                         });
                       }}
@@ -105,4 +104,4 @@ const PatientAppointments = () => {
   );
 };
 
-export default PatientAppointments;
+export default DoctorAppointments;

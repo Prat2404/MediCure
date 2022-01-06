@@ -1,13 +1,8 @@
-import { Container, TextField, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 import { makeStyles } from '@mui/styles';
-import PropTypes from 'prop-types';
-import React, { useState, useEffect, Fragment, Component } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
-import Auth from '../../utils/Auth';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { createProfile, getCurrentProfile } from '../../utils/profileactions';
 const useStyle = makeStyles({
   field: {

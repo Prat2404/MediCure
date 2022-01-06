@@ -12,7 +12,9 @@ const UserSchema = mongoose.Schema({
     ref: 'patient',
     required: true,
   },
-
+  DoctorName: {
+    type: String,
+  },
   DoctorId: {
     type: Schema.Types.ObjectId,
     ref: 'doctor',
@@ -38,6 +40,12 @@ const UserSchema = mongoose.Schema({
     type: String,
   },
   Phone: {
+    type: String,
+  },
+  Age: {
+    type: Number,
+  },
+  Sex: {
     type: String,
   },
   Recipt: {

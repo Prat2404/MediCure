@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
-
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from 'react';
 import AuthRouter from './components/AuthRouter';
+
 function App() {
   return <AuthRouter />;
 }

@@ -11,7 +11,6 @@ const jwtSecret = require('../config/keys').jwtSecret;
 router.post(
   '/',
   [
-    check('Name', 'Name is required').not().isEmpty(),
     check('Email', 'Please enter valid email').isEmail(),
     check('Password', 'Please enter a valid password').isLength({ min: 6 }),
   ],
@@ -22,7 +21,6 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const name = req.body.Name;
       const email = req.body.Email;
       const password = req.body.Password;
       // check whether this doctor already exist
@@ -33,8 +31,7 @@ router.post(
           .json({ errors: [{ msg: 'user already exists' }] });
       }
       // Create new doctor object
-       doctor = new Doctor({
-        Name: name,
+      doctor = new Doctor({
         Email: email,
         Password: password,
       });

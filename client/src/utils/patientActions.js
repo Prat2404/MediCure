@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react';
 export const bookAppoinment = async (appointmentData, history) => {
   //   console.log(appointmentData);
   return axios

@@ -1,11 +1,11 @@
 import { Container, TextField, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 import { makeStyles } from '@mui/styles';
-
-import React, { useState, useEffect, Fragment } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Auth from '../../utils/Auth';
+
 const useStyle = makeStyles({
   field: {
     marginTop: 20,
@@ -18,7 +18,6 @@ const useStyle = makeStyles({
 const DoctorRegister = (props) => {
   const classes = useStyle();
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
@@ -44,7 +43,6 @@ const DoctorRegister = (props) => {
         .post(
           'http://localhost:5000/doctor/register',
           {
-            Name: name,
             Email: email,
             Password: password1,
           },
@@ -65,15 +63,6 @@ const DoctorRegister = (props) => {
     <Container>
       <Typography className={classes.field}>Sign Up</Typography>
       <form onSubmit={doRegister}>
-        <TextField
-          type='text'
-          name='name'
-          placeholder='Name'
-          className={classes.text}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
         <TextField
           type='text'
           name='email'

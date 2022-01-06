@@ -1,16 +1,16 @@
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { Avatar, CssBaseline, Drawer, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import React from 'react';
+import AppBar from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { makeStyles } from '@mui/styles';
+import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Navbar from './DcotorNavbar';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
@@ -63,6 +63,11 @@ const DoctorLayout = ({ children }) => {
       icon: <HourglassBottomIcon color='secondary' />,
       path: '/doctor/scheduleTimings',
     },
+    {
+      text: 'Appointments',
+      icon: <ListAltIcon color='secondary' />,
+      path: '/doctor/appointments',
+    },
   ];
   return (
     <div className={classes.root}>
@@ -104,14 +109,6 @@ const DoctorLayout = ({ children }) => {
           ))}
         </List>
         {/* Doctor Appoint and other  */}
-        <List>
-          <ListItem button>
-            <ListItemText primary='Find Doctors' />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary='Appointment' />
-          </ListItem>
-        </List>
       </Drawer>
       <div className={classes.pages}>
         <div className={classes.toolbar}></div>

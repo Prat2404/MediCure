@@ -89,24 +89,40 @@ function upload(req, callback) {
     var randomName = sha1(new Date().getTime()) + '.' + getExtension(filename);
     link = fileRoute + randomName;
     var prescription = {};
-
+    //  console.log(req.headers);
     if (req.headers.val) prescription.Date = new Date(req.headers.val);
     if (req.headers.doctor) prescription.Doctor = req.headers.doctor;
+    if (req.headers.lab) prescription.Lab = req.headers.lab;
     if (req.headers.patient) prescription.patient = req.headers.patient;
     if (link) prescription.url = link;
-    Profile.findOne({ user: req.user }).then((profile) => {
-      if (profile) {
-        // Updatene
-        Profile.findOneAndUpdate(
-          { user: req.user },
-          { $push: { Prescription: prescription } }
-        ).catch((err) => console.log(err));
-      } else {
-        // Create
-        // Save Profile
-        res.json('profile not found');
-      }
-    });
+    if (prescription.doctor)
+      Profile.findOne({ user: req.user }).then((profile) => {
+        if (profile) {
+          // Updatene
+          Profile.findOneAndUpdate(
+            { user: req.user },
+            { $push: { Prescription: prescription } }
+          ).catch((err) => console.log(err));
+        } else {
+          // Create
+          // Save Profile
+          res.json('profile not found');
+        }
+      });
+    else
+      Profile.findOne({ user: req.user }).then((profile) => {
+        if (profile) {
+          // Updatene
+          Profile.findOneAndUpdate(
+            { user: req.user },
+            { $push: { LabReport: prescription } }
+          ).catch((err) => console.log(err));
+        } else {
+          // Create
+          // Save Profile
+          res.json('profile not found');
+        }
+      });
     // Generate path where the file will be saved.
     var appDir = path.dirname(require.main.filename);
     saveToPath = path.join(appDir, link);

@@ -80,6 +80,23 @@ export const getpresctiption = () => {
       // })
     );
 };
+export const getlabreports = () => {
+  return axios
+    .get('http://localhost:5000/patient/reports', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then(
+      (res) => {
+        console.log(res);
+        return res.data;
+      }
+      // dispatch({
+      //   payload: res.data,
+      // })
+    );
+};
 export const downloadprescription = (index) => {
   console.log(index);
   // return axios
