@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { api, app_id, app_key } from './keys';
-export const inferDiagnosis = async (body, interviewId) => {
-  const res = await axios.post(api + 'diagnosis/', body, {
+export const inferDiagnosis = (body, interviewId) => {
+  return axios.post(api + 'diagnosis/', body, {
     headers: {
       'App-Id': app_id,
       'App-Key': app_key,
@@ -10,7 +10,6 @@ export const inferDiagnosis = async (body, interviewId) => {
       'Dev-Mode': 'true',
     },
   });
-  return res.data;
 };
 export const inferExplain = async (body, interviewId) => {
   const res = await axios.post(api + 'explain/', body, {
@@ -24,8 +23,8 @@ export const inferExplain = async (body, interviewId) => {
   });
   return res.data;
 };
-export const inferSuggest = async (body, interviewId) => {
-  const res = await axios.post(api + 'suggest/', body, {
+export const inferSuggest = (body, interviewId) => {
+  return axios.post(api + 'suggest/', body, {
     headers: {
       'App-Id': app_id,
       'App-Key': app_key,
@@ -34,7 +33,7 @@ export const inferSuggest = async (body, interviewId) => {
       'Dev-Mode': 'true',
     },
   });
-  return res.data;
+  // return res.data;
 };
 
 export const inferTraige = async (body, interviewId) => {

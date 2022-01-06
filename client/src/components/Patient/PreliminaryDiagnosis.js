@@ -30,7 +30,11 @@ import Symptoms from './Symptoms';
 import React, { useState, useEffect, Fragment } from 'react';
 import { makeStyles } from '@mui/styles';
 import RiskFactors from './RiskFactors';
-import { inferSearch } from '../../utils/infermedicaApi/infermedicaApi';
+import {
+  inferDiagnosis,
+  inferSearch,
+  inferSuggest,
+} from '../../utils/infermedicaApi/infermedicaApi';
 const useStyles = makeStyles({
   landingCard: {
     justifyContent: 'center',
@@ -155,8 +159,58 @@ const initialAppointmnet = [
     _id: new Object(''),
   },
 ];
+const evidence = [
+  // {
+  //   id: 's_21',
+  //   choice_id: 'present',
+  //   source: 'initial',
+  // },
+  // {
+  //   id: 's_1193',
+  //   choice_id: 'present',
+  //   source: 'initial',
+  // },
+];
+const initialQuestion = {
+  question: {
+    type: '',
+    text: '',
+    items: [
+      {
+        id: '',
+        name: '',
+        choices: [
+          {
+            id: '',
+            label: '',
+          },
+          {
+            id: '',
+            label: '',
+          },
+          {
+            id: '',
+            label: '',
+          },
+        ],
+      },
+    ],
+    extras: {},
+  },
+  conditions: [
+    {
+      id: '',
+      name: '',
+      common_name: '',
+      probability: 0,
+    },
+  ],
+  extras: {},
+  has_emergency_evidence: false,
+  should_stop: false,
+};
 const PreliminaryDiagnosis = (props) => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   const classes = useStyles();
   const [interviewId, setInterviewId] = useState('');
   const [read, setRead] = useState(false);
@@ -165,6 +219,8 @@ const PreliminaryDiagnosis = (props) => {
   const [next3, setNext3] = useState(5);
   const [symptomFilter, setSymptonFilter] = useState('');
   const [appointment, setAppointment] = useState(initialAppointmnet);
+  const [next4, setNext4] = useState(2);
+  const [next6, setNext6] = useState(0);
   const [symptoms, setSymptoms] = useState([
     {
       id: '',
@@ -174,13 +230,25 @@ const PreliminaryDiagnosis = (props) => {
   const [filteredSymptom, setFilteredSymptom] = useState([
     { id: '', label: '' },
   ]);
-  const [evidence, setEvidence] = useState([]);
+  const [questions, setQuestions] = useState(initialQuestion);
   const [selectedSymptoms, setSelectedSymptoms] = useState([
     // {
-    //   id: '',
-    //   label: '',
+    //   id: 's_21',
+    //   label: 'Headache',
+    // },
+    // {
+    //   id: 's_1193',
+    //   label: 'Headache, severe',
     // },
   ]);
+  const [suggestedSymptoms, setsuggestedSymptoms] = useState([
+    {
+      id: '',
+      name: '',
+      common_name: '',
+    },
+  ]);
+  const [checked, setChecked] = useState([]);
   const searchItems = (symptomFilter) => {
     const filterData = symptoms.filter((item) => {
       return Object.values(item)
@@ -198,6 +266,102 @@ const PreliminaryDiagnosis = (props) => {
   };
   const handleStepChange = (steps) => {
     setStep(steps);
+  };
+  const handleToggle = (value) => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+    console.log(newChecked);
+  };
+  const handleStepChange4 = () => {
+    selectedSymptoms.map((symptom) => {
+      evidence.push({
+        id: symptom.id,
+        choice_id: 'present',
+        source: 'initial',
+      });
+    });
+    riskFactors.map((riskFactor) => {
+      if (riskFactor.choice_id == 'present' || riskFactor.choice_id == 'absent')
+        evidence.push({
+          id: riskFactor.id,
+          choice_id: riskFactor.choice_id,
+          source: 'predefined',
+        });
+    });
+    console.log(evidence);
+    const suggestSymptom = {
+      sex: appointment.Sex,
+      age: {
+        value: appointment.Age,
+      },
+      suggest_method: 'symptoms',
+      evidence: evidence,
+    };
+    inferSuggest(suggestSymptom, interviewId).then((res) => {
+      console.log(res.data);
+      setsuggestedSymptoms(res.data);
+    });
+    setStep(step + 1);
+  };
+  const handleStepChange5 = () => {
+    checked.map((item) => {
+      evidence.push({
+        id: item.id,
+        choice_id: 'present',
+      });
+    });
+    console.log(evidence);
+    const packet = {
+      sex: appointment.Sex,
+      age: {
+        value: appointment.Age,
+      },
+      evidence: evidence,
+      extras: {
+        include_condition_details: true,
+      },
+    };
+    inferDiagnosis(packet, interviewId).then((res) => {
+      console.log(res.data);
+      setQuestions(res.data);
+    });
+
+    setNext6(0);
+    setStep(step + 1);
+  };
+  const handleStepChange6 = () => {
+    setQuestions(initialQuestion);
+    const packet = {
+      sex: appointment.Sex,
+      age: {
+        value: appointment.Age,
+      },
+      evidence: evidence,
+      extras: {
+        include_condition_details: true,
+      },
+    };
+    inferDiagnosis(packet, interviewId).then((res) => {
+      console.log(res.data);
+      setQuestions(res.data);
+    });
+    if (questions.should_stop == true) setStep(step + 1);
+    setNext6(0);
+  };
+  const handleRemoveSymptom = (item) => {
+    setSelectedSymptoms(
+      selectedSymptoms.filter((symptom) => symptom.id != item.id)
+    );
+    console.log(selectedSymptoms);
+    setNext4(next4 - 1);
   };
   const handleFilterChange = (temp) => {
     setSymptonFilter(temp);
@@ -507,6 +671,8 @@ const PreliminaryDiagnosis = (props) => {
                                     ...selectedSymptoms,
                                     item,
                                   ]);
+
+                                  setNext4(next4 + 1);
                                   setSymptonFilter('');
                                   setFilteredSymptom([
                                     {
@@ -514,7 +680,7 @@ const PreliminaryDiagnosis = (props) => {
                                       label: '',
                                     },
                                   ]);
-                                  // console.log(selectedSymptoms);
+                                  console.log(selectedSymptoms);
                                 }}
                               >
                                 <ListItemText primary={item.label} />
@@ -540,7 +706,7 @@ const PreliminaryDiagnosis = (props) => {
                                 secondaryAction={
                                   <IconButton
                                     onClick={(e) => {
-                                      console.log('hello');
+                                      handleRemoveSymptom(item);
                                     }}
                                   >
                                     <DeleteIcon />
@@ -562,9 +728,225 @@ const PreliminaryDiagnosis = (props) => {
                     >
                       Back
                     </Button>
+                    {next4 >= 2 && (
+                      <Button
+                        variant='contained'
+                        onClick={(e) => handleStepChange4()}
+                      >
+                        Next
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      );
+      break;
+    //suggest more symptoms based on the symptoms before
+    case 5:
+      return (
+        <Container>
+          <div className={classes.screenConatiner}>
+            <div className={classes.screen}>
+              <div className={classes.screenContent}>
+                <div className={classes.spilt}>
+                  {/* <Symptoms /> */}
+                  <Card>
+                    <div className={classes.symptoms}>
+                      <h3 className={classes.textCenter}>
+                        Do you have any of the following symptoms?
+                      </h3>
+
+                      <div className={classes.symptomsContent}>
+                        <List
+                          sx={{
+                            width: '100%',
+
+                            bgcolor: 'background.paper',
+                            position: 'relative',
+                            overflow: 'auto',
+
+                            '& ul': { padding: 0 },
+                          }}
+                        >
+                          {suggestedSymptoms.map((item) => {
+                            return (
+                              <ListItem
+                                key={item.id}
+                                secondaryAction={
+                                  <Checkbox
+                                    edge='end'
+                                    onChange={(e) => handleToggle(item)}
+                                    checked={checked.indexOf(item) != -1}
+                                  />
+                                }
+                              >
+                                <ListItemText primary={item.common_name} />
+                              </ListItem>
+                            );
+                          })}
+                        </List>
+                      </div>
+                    </div>
+                  </Card>
+                  <div className={classes.actionArea}>
                     <Button
                       variant='contained'
-                      onClick={(e) => setStep(step + 1)}
+                      onClick={(e) => setStep(step - 1)}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      variant='contained'
+                      onClick={(e) => handleStepChange5()}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      );
+      break;
+    //daignosis part starts
+    case 6:
+      return (
+        <Container>
+          <div className={classes.screenConatiner}>
+            <div className={classes.screen}>
+              <div className={classes.screenContent}>
+                <div className={classes.spilt}>
+                  <Card>
+                    <div className={classes.symptoms}>
+                      <h3 className={classes.textCenter}>
+                        {questions.question.text}
+                      </h3>
+                      {questions.question.type == 'single' && (
+                        <FormControl component='fieldset'>
+                          <RadioGroup
+                            row
+                            name='row-radio-buttons-group'
+                            onChange={(e) => {
+                              evidence.push({
+                                id: questions.question.items[0].id,
+                                choice_id: e.target.value,
+                              });
+                              // handleStepChange6();
+                              // console.log(riskFactor);
+                            }}
+                          >
+                            <FormControlLabel
+                              value='present'
+                              control={<Radio />}
+                              label='Yes'
+                            />
+                            <FormControlLabel
+                              value='absent'
+                              control={<Radio />}
+                              label='No'
+                            />
+                            <FormControlLabel
+                              value='unknown'
+                              control={<Radio />}
+                              label="Don't Know"
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      )}
+                      {questions.question.type == 'group_single' && (
+                        <FormControl component='fieldset'>
+                          <RadioGroup
+                            column
+                            name='row-radio-buttons-group'
+                            onChange={(e) => {
+                              evidence.push({
+                                id: e.target.value,
+                                choice_id: 'present',
+                              });
+                              // console.log(evidence);
+                              // handleStepChange6();
+                            }}
+                          >
+                            {questions.question.items.map((item) => {
+                              return (
+                                <FormControlLabel
+                                  value={item.id}
+                                  control={<Radio />}
+                                  label={item.name}
+                                />
+                              );
+                            })}
+                          </RadioGroup>
+                        </FormControl>
+                      )}
+                      {questions.question.type == 'group_multiple' && (
+                        <TableContainer component={Paper}>
+                          <Table
+                            sx={{ minWidth: 650 }}
+                            aria-label='simple table'
+                          >
+                            <TableHead>
+                              {questions.question.items.map((item) => {
+                                return (
+                                  <TableRow>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell align='right'>
+                                      <FormControl component='fieldset'>
+                                        <RadioGroup
+                                          row
+                                          name='row-radio-buttons-group'
+                                          onChange={(e) => {
+                                            const temp = e.target.value;
+                                            const index = evidence.findIndex(
+                                              (obj) => obj.id == item.id
+                                            );
+                                            if (index == -1) {
+                                              setNext6(next6 + 1);
+                                              evidence.push({
+                                                id: item.id,
+                                                choice_id: temp,
+                                              });
+                                            } else {
+                                              evidence[index].choice_id = temp;
+                                            }
+                                            // console.log(riskFactor);
+                                          }}
+                                        >
+                                          <FormControlLabel
+                                            value='present'
+                                            control={<Radio />}
+                                            label='Yes'
+                                          />
+                                          <FormControlLabel
+                                            value='absent'
+                                            control={<Radio />}
+                                            label='No'
+                                          />
+                                          <FormControlLabel
+                                            value='unknown'
+                                            control={<Radio />}
+                                            label="Don't Know"
+                                          />
+                                        </RadioGroup>
+                                      </FormControl>
+                                    </TableCell>
+                                  </TableRow>
+                                );
+                              })}
+                            </TableHead>
+                          </Table>
+                        </TableContainer>
+                      )}
+                    </div>
+                  </Card>
+                  <div className={classes.actionArea}>
+                    <Button
+                      variant='contained'
+                      onClick={(e) => handleStepChange6()}
                     >
                       Next
                     </Button>
