@@ -17,7 +17,7 @@ const useStyle = makeStyles({
 });
 const DoctorRegister = (props) => {
   const classes = useStyle();
-
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
@@ -45,6 +45,7 @@ const DoctorRegister = (props) => {
           {
             Email: email,
             Password: password1,
+            Username: username,
           },
           { headers }
         )
@@ -63,6 +64,14 @@ const DoctorRegister = (props) => {
     <Container>
       <Typography className={classes.field}>Sign Up</Typography>
       <form onSubmit={doRegister}>
+        <TextField
+          type='text'
+          name='username'
+          placeholder='username'
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
         <TextField
           type='text'
           name='email'

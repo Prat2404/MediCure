@@ -22,6 +22,7 @@ import PatientLogin from './Patient/PatientLogin';
 import PatientProfile from './Patient/PatientProfile';
 import PatientRegister from './Patient/PatientRegister';
 import PatientSearchDoctor from './Patient/PatientSearchDoctor';
+import ChatPage from './chat/chatpage.js';
 
 const AuthRouter = () => {
   return (
@@ -34,6 +35,7 @@ const AuthRouter = () => {
         <Route exact path='/patient/' component={PatientLogin} />
         <Route exact path='/patient/login' component={PatientLogin} />
         <Route exact path={'/patient/register'} component={PatientRegister} />
+        <PrivatePatientRoute exact path='/patient/chat' component={ChatPage} />
 
         <PrivatePatientRoute
           exact
@@ -84,6 +86,7 @@ const AuthRouter = () => {
           path='/doctor/appointments'
           component={DoctorAppointments}
         />
+        <PrivateDoctorRoute exact path='/doctor/chat' component={ChatPage} />
         <PrivateDoctorRoute exact path='/doctor/home' component={DoctorHome} />
         <PrivateDoctorRoute
           exact

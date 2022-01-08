@@ -18,6 +18,22 @@ export const getCurrentProfile = () => {
       // })
     );
 };
+export const getCurrentUser = () => {
+  return axios
+    .get('http://localhost:5000/patient/user', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then(
+      (res) => {
+        return res.data;
+      }
+      // dispatch({
+      //   payload: res.data,
+      // })
+    );
+};
 
 // Create Profile
 export const createProfile = (profileData, history) => {

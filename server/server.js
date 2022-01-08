@@ -21,6 +21,7 @@ const reports = require('./routes/reports');
 const filedown = require('./routes/file_download');
 const auth = require('./middleware/auth');
 const prediagnosis = require('./routes/preliminaryDiagnosis');
+const userdetails = require('./routes/userdetails');
 //const filelist = require('./routes/file_list');
 const app = express();
 
@@ -70,6 +71,7 @@ app.use('/patient/reports', reports);
 app.use('/patient/find-appointment-availability', appointmentAvailability);
 app.use('/patient/appointment', appoinment);
 app.use('/patient/checkpreliminaryDiagnosis', prediagnosis);
+app.use('/patient/user', userdetails);
 app.use('/profile', profile);
 app.use('/doctor/login', dlogin);
 app.use('/doctor/register', dregister);

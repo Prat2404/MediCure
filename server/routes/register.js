@@ -5,6 +5,7 @@ const Patient = require('../schemas/patient');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const jwtSecret = require('../config/keys').jwtSecret;
+const axios = require('axios');
 // @route  POST /register
 // @desc   Test route
 // @access Public
@@ -21,7 +22,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const name = req.body.Name;
+      const username = req.body.Username;
       const email = req.body.Email;
       const password = req.body.Password;
       // check whether this patient already exist
@@ -33,6 +34,7 @@ router.post(
       }
       // Create new patient object
       patient = new Patient({
+        Username: username,
         Email: email,
         Password: password,
       });
@@ -48,8 +50,34 @@ router.post(
         user: {
           doctor: flag,
           id: patient.id,
+          email: patient.Email,
+          password: patient.Password,
+          username: patient.Username,
         },
       };
+      var data = {
+        username: patient.Username,
+        secret: patient.Password,
+        email: patient.Email,
+      };
+      console.log(data);
+
+      var config = {
+        method: 'post',
+        url: 'https://api.chatengine.io/users/',
+        headers: {
+          'PRIVATE-KEY': process.env.CHAT_ENGINE_PRIVATE_KEY,
+        },
+        data: data,
+      };
+      console.log(config);
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       jwt.sign(payload, jwtSecret, { expiresIn: 36000 }, (err, token) => {
         if (err) {
           throw err;
