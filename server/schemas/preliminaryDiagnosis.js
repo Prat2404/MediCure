@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { type } = require('os');
 const Schema = mongoose.Schema;
 
 const PreliminaryDiagnosis = mongoose.Schema({
@@ -36,6 +37,13 @@ const PreliminaryDiagnosis = mongoose.Schema({
     extras: {},
     should_stop: { type: Boolean },
   },
+  Evidence: [
+    {
+      id: { type: String },
+      choice_id: { type: String },
+      source: { type: String },
+    },
+  ],
   Triage: {
     triage_level: { type: String },
     serious: [
@@ -49,29 +57,39 @@ const PreliminaryDiagnosis = mongoose.Schema({
     root_cause: { type: String },
     teleconsultation_applicable: { type: Boolean },
   },
-  Explain: {
-    supporting_evidence: [
-      {
-        id: { type: String },
-        name: { type: String },
-        common_name: { type: String },
-      },
-    ],
-    conflicting_evidence: [
-      {
-        id: { type: String },
-        name: { type: String },
-        common_name: { type: String },
-      },
-    ],
-    unconfirmed_evidence: [
-      {
-        id: { type: String },
-        name: { type: String },
-        common_name: { type: String },
-      },
-    ],
+  Specialist: {
+    recommended_specialist: {
+      id: { type: String },
+      name: { type: String },
+    },
+    recommended_channel: { type: String },
   },
+  Explain: [
+    {
+      condition_id: { type: String },
+      supporting_evidence: [
+        {
+          id: { type: String },
+          name: { type: String },
+          common_name: { type: String },
+        },
+      ],
+      conflicting_evidence: [
+        {
+          id: { type: String },
+          name: { type: String },
+          common_name: { type: String },
+        },
+      ],
+      unconfirmed_evidence: [
+        {
+          id: { type: String },
+          name: { type: String },
+          common_name: { type: String },
+        },
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model('preliminaryDiagnosis', PreliminaryDiagnosis);

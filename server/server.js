@@ -78,3 +78,6 @@ app.use('/doctor/register', dregister);
 app.use('/doctor/profile', dprofile);
 app.use('/doctor/getAppointments', DoctorAppointments);
 app.use('/doctor/scheduleTimings', doctorTimeSlot);
+app.use('/patient/find-appointment-availability', appointmentAvailability);
+app.use('/patient/appointment', appoinment);
+app.use('/patient/preliminaryDaignosis', prediagnosis);

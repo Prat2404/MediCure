@@ -1,5 +1,5 @@
 patientUser:
-    Name, Email,Passwd,
+     Email,Passwd,
 doctorUser:
     Name, Email,Passwd,
 patientProfile:
