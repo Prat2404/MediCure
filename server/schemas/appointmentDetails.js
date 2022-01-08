@@ -12,7 +12,9 @@ const UserSchema = mongoose.Schema({
     ref: 'patient',
     required: true,
   },
-
+  DoctorName: {
+    type: String,
+  },
   DoctorId: {
     type: Schema.Types.ObjectId,
     ref: 'doctor',

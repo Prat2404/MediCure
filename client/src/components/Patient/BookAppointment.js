@@ -39,6 +39,7 @@ const BookAppointment = (props) => {
       timeSlot,
       firstName,
       lastName,
+      name,
       email,
       phone,
       age,

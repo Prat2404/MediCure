@@ -48,6 +48,7 @@ const PatientLayout = ({ children }) => {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
+  console.log({ children });
   console.log(location.pathname);
   const menuItems = [
     {
