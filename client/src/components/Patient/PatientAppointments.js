@@ -21,6 +21,7 @@ const PatientAppointments = () => {
     //     _id: new Object(),
     //     Name: '',
     //   },
+    // DoctorName:
     //   BookingDate: '',
     //   AppointmentDate: '',
     //   TimeSlot: {
