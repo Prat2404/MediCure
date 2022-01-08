@@ -1,4 +1,12 @@
-import { Container, Box, TextField, Card, Typography } from '@mui/material';
+import {
+  Container,
+  Box,
+  TextField,
+  Card,
+  Typography,
+  CircularProgress,
+  Backdrop,
+} from '@mui/material';
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
@@ -68,8 +76,18 @@ const PatientEditAppointments = (props) => {
       });
     console.log(appointment);
   }, []);
+  const handleClose = () => {
+    setOpen(true);
+  };
   return (
     <Box className={classes.screen}>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={!open}
+        onClick={(e) => handleClose}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
       <Box component='div' className={classes.screenContent}>
         <Card
           component='form'
@@ -220,9 +238,9 @@ const PatientEditAppointments = (props) => {
         <Typography sx={{ padding: '10px' }} variant='h5'>
           Preliminary Diagnosis
         </Typography>
-        {!open && (
+        {/* {!open && (
           <img src={process.env.PUBLIC_URL + '/static/images/loading.gif'} />
-        )}
+        )} */}
         {open && !preliminary && (
           <PreliminaryDiagnosis appointment={appointment} />
         )}
