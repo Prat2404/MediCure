@@ -28,9 +28,15 @@ import { makeStyles } from '@mui/styles';
 import React, { Fragment, useEffect, useState } from 'react';
 import {
   inferDiagnosis,
+  inferExplain,
   inferSearch,
+  inferSpecialist,
   inferSuggest,
+  inferTraige,
 } from '../../utils/infermedicaApi/infermedicaApi';
+import { useHistory } from 'react-router';
+
+import { submitPreliminaryDiagnosis } from '../../utils/patientActions';
 const useStyles = makeStyles({
   landingCard: {
     justifyContent: 'center',
@@ -205,6 +211,7 @@ const initialQuestion = {
   has_emergency_evidence: false,
   should_stop: false,
 };
+const explain = [];
 const PreliminaryDiagnosis = (props) => {
   const [step, setStep] = useState(1);
   const classes = useStyles();
@@ -245,6 +252,12 @@ const PreliminaryDiagnosis = (props) => {
     },
   ]);
   const [checked, setChecked] = useState([]);
+  const [traige, setTraige] = useState({
+    id: '',
+  });
+  const [specialist, setSpecialist] = useState({
+    id: '',
+  });
   const searchItems = (symptomFilter) => {
     const filterData = symptoms.filter((item) => {
       return Object.values(item)
@@ -256,7 +269,7 @@ const PreliminaryDiagnosis = (props) => {
     setFilteredSymptom(filterData);
     // console.log(filteredSymptom);
   };
-
+  const history = useHistory();
   const handleRiskFactors = (riskFactor) => {
     setRiskFactors(riskFactor);
   };
@@ -349,8 +362,61 @@ const PreliminaryDiagnosis = (props) => {
       console.log(res.data);
       setQuestions(res.data);
     });
-    if (questions.should_stop == true) setStep(step + 1);
+    if (questions.should_stop == true) {
+      preliminaryDiagnosisComplete();
+    }
     setNext6(0);
+  };
+  const preliminaryDiagnosisComplete = () => {
+    // inferTraige()
+    setStep(step + 1);
+    const packet = {
+      sex: appointment.Sex,
+      age: {
+        value: appointment.Age,
+      },
+      evidence: evidence,
+    };
+    inferTraige(packet, interviewId).then((res) => {
+      console.log(res.data);
+      setTraige(res.data);
+    });
+    inferSpecialist(packet, interviewId).then((res) => {
+      console.log(res.data);
+      setSpecialist(res.data);
+    });
+
+    questions.conditions.map((condition) => {
+      packet.target = condition.id;
+      inferExplain(packet, interviewId).then((res) => {
+        console.log(res.data);
+        explain.push({
+          id: condition.id,
+          supporting_evidence: res.data.supporting_evidence,
+          conflicting_evidence: res.data.conflicting_evidence,
+          unconfirmed_evidence: res.data.unconfirmed_evidence,
+        });
+      });
+    });
+
+    // console.log(evidence, questions, traige, specialist, explain);
+  };
+  const handleSubmit = () => {
+    const appointmentId = appointment._id;
+    submitPreliminaryDiagnosis(
+      appointmentId,
+      questions,
+      evidence,
+      traige,
+      specialist,
+      explain
+    ).then((res) => console.log('Submitted'));
+
+    // setStep(step + 1);
+    history.push({
+      pathname: '/patient/appointments/view',
+      state: { detail: appointment },
+    });
   };
   const handleRemoveSymptom = (item) => {
     setSelectedSymptoms(
@@ -953,7 +1019,32 @@ const PreliminaryDiagnosis = (props) => {
           </div>
         </Container>
       );
-
+    case 7:
+      return (
+        <Container>
+          <div className={classes.screenConatiner}>
+            <div className={classes.screen}>
+              <div className={classes.screenContent}>
+                <div className={classes.spilt}>
+                  <Card>
+                    <div className={classes.symptoms}>
+                      <h3 className={classes.textCenter}>
+                        You have completed your PreliminaryDiagnosis
+                      </h3>
+                      <p className={classes.textCenter}> Submit to Continue</p>
+                    </div>
+                  </Card>
+                  <div className={classes.actionArea}>
+                    <Button variant='contained' onClick={(e) => handleSubmit()}>
+                      Submit
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      );
     default:
       return <Fragment>Hello</Fragment>;
   }

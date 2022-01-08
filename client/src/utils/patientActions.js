@@ -37,6 +37,7 @@ export const getAppointments = async (doctorId, date) => {
     .catch((err) => console.log(err.msg));
   // return timeSlots;
 };
+
 export const getAppointDetails = async () => {
   console.log('Hello');
   return axios
@@ -50,6 +51,24 @@ export const getAppointDetails = async () => {
     })
     .catch((err) => console.log(err));
 };
+export const deleteAppointment = (id) => {
+  return axios
+    .post(
+      'http://localhost:5000/patient/appointment/delete',
+      {
+        Id: id,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('token'),
+        },
+      }
+    )
+    .then((res) => {
+      return res.data;
+    });
+};
 export const getDoctorsList = async () => {
   console.log('Hello');
   return axios
@@ -62,4 +81,36 @@ export const getDoctorsList = async () => {
       return res.data;
     })
     .catch((err) => console.log(err));
+};
+
+export const submitPreliminaryDiagnosis = (
+  appointmentId,
+  questions,
+  evidence,
+  traige,
+  specialist,
+  explain
+) => {
+  console.log(appointmentId, questions, evidence, traige, specialist, explain);
+  return axios
+    .post(
+      'http://localhost:5000/patient/preliminaryDaignosis/submit',
+      {
+        appointmentId: appointmentId,
+        questions: questions,
+        evidence: evidence,
+        triage: traige,
+        specialist: specialist,
+        explain: explain,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('token'),
+        },
+      }
+    )
+    .then((res) => {
+      return res.data;
+    });
 };

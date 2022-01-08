@@ -73,4 +73,4 @@ app.use('/doctor/profile', dprofile);
 app.use('/doctor/scheduleTimings', doctorTimeSlot);
 app.use('/patient/find-appointment-availability', appointmentAvailability);
 app.use('/patient/appointment', appoinment);
-app.use('/patient/checkpreliminaryDiagnosis', prediagnosis);
+app.use('/patient/preliminaryDaignosis', prediagnosis);

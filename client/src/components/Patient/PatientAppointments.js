@@ -8,35 +8,38 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { getAppointDetails } from '../../utils/patientActions';
+import {
+  deleteAppointment,
+  getAppointDetails,
+} from '../../utils/patientActions';
 
 const PatientAppointments = () => {
   const [appointments, setAppointments] = useState([
-    {
-      PatientId: '',
-      DoctorId: {
-        _id: new Object(),
-        Name: '',
-      },
-      BookingDate: '',
-      AppointmentDate: '',
-      TimeSlot: {
-        startTime: '',
-        endTime: '',
-        status: '',
-        _id: '',
-      },
-      FirstName: '',
-      LastName: '',
-      Email: '',
-      Phone: '',
-      Recipt: '',
-      AppointmentMode: 0,
-      Symptoms: '',
-      Age: '',
-      Sex: '',
-      _id: new Object(''),
-    },
+    // {
+    //   PatientId: '',
+    //   DoctorId: {
+    //     _id: new Object(),
+    //     Name: '',
+    //   },
+    //   BookingDate: '',
+    //   AppointmentDate: '',
+    //   TimeSlot: {
+    //     startTime: '',
+    //     endTime: '',
+    //     status: '',
+    //     _id: '',
+    //   },
+    //   FirstName: '',
+    //   LastName: '',
+    //   Email: '',
+    //   Phone: '',
+    //   Recipt: '',
+    //   AppointmentMode: 0,
+    //   Symptoms: '',
+    //   Age: '',
+    //   Sex: '',
+    //   _id: new Object(''),
+    // },
   ]);
   useEffect(() => {
     getAppointDetails().then((res) => {
@@ -44,6 +47,9 @@ const PatientAppointments = () => {
       setAppointments(res);
     });
   }, []);
+  const handleDelete = (id) => {
+    deleteAppointment(id);
+  };
   const history = useHistory();
   return (
     <Container>
@@ -92,7 +98,14 @@ const PatientAppointments = () => {
                     >
                       View
                     </Button>
-                    <Button>Delete</Button>
+                    <Button
+                      onClick={(e) => {
+                        handleDelete(appointment._id);
+                        window.location.reload();
+                      }}
+                    >
+                      Delete
+                    </Button>
                   </TableCell>
                 </TableRow>
               );

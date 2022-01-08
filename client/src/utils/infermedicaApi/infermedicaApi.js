@@ -11,8 +11,8 @@ export const inferDiagnosis = (body, interviewId) => {
     },
   });
 };
-export const inferExplain = async (body, interviewId) => {
-  const res = await axios.post(api + 'explain/', body, {
+export const inferExplain = (body, interviewId) => {
+  return axios.post(api + 'explain/', body, {
     headers: {
       'App-Id': app_id,
       'App-Key': app_key,
@@ -21,7 +21,6 @@ export const inferExplain = async (body, interviewId) => {
       'Dev-Mode': 'true',
     },
   });
-  return res.data;
 };
 export const inferSuggest = (body, interviewId) => {
   return axios.post(api + 'suggest/', body, {
@@ -36,8 +35,8 @@ export const inferSuggest = (body, interviewId) => {
   // return res.data;
 };
 
-export const inferTraige = async (body, interviewId) => {
-  const res = await axios.post(api + 'suggest/', body, {
+export const inferTraige = (body, interviewId) => {
+  return axios.post(api + 'triage/', body, {
     headers: {
       'App-Id': app_id,
       'App-Key': app_key,
@@ -46,7 +45,19 @@ export const inferTraige = async (body, interviewId) => {
       'Dev-Mode': 'true',
     },
   });
-  return res.data;
+  // return res.data;
+};
+export const inferSpecialist = (body, interviewId) => {
+  return axios.post(api + 'recommend_specialist/', body, {
+    headers: {
+      'App-Id': app_id,
+      'App-Key': app_key,
+      'Content-Type': 'application/json',
+      'Interview-Id': interviewId,
+      'Dev-Mode': 'true',
+    },
+  });
+  // return res.data;
 };
 export const inferSearch = async (
   phrase,

@@ -102,24 +102,21 @@ router.post(
     }
   }
 );
-router.post(
-  '/delete',
-  [check('Id', 'Id Recuired').not().isEmpty()],
-  async (req, res) => {
-    const Id = req.body.Id;
-    const filter = { _id: Id };
+router.post('/delete', auth, async (req, res) => {
+  // console.log(req.body,)
+  const Id = req.body.Id;
+  const filter = { _id: Id };
 
-    // console.log(query, filter, update);
-    try {
-      let result = await Appointment.findOneAndDelete(filter);
-      // console.log(result);
-      return res.send('Appointment delete successful');
-    } catch (error) {
-      console.log(error);
-      return res.status(500).send('(Server) Appointment update error');
-    }
+  // console.log(query, filter, update);
+  try {
+    let result = await Appointment.findOneAndDelete(filter);
+    // console.log(result);
+    return res.send('Appointment delete successful');
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('(Server) Appointment update error');
   }
-);
+});
 // getTheAppointmetDetails
 router.get('/getAppointDetails', auth, async (req, res) => {
   const patientId = req.user;
