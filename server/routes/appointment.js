@@ -7,7 +7,8 @@ const Appointment = require('../schemas/appointmentDetails');
 const auth = require('../middleware/auth');
 const Doctor = require('../schemas/doctor');
 const DoctorProfile = require('../schemas/doctorProfile');
-
+const axios = require('axios');
+const User = require('../schemas/patient');
 // @route  POST /login
 // @desc   Test route
 // @access Public
@@ -41,9 +42,76 @@ router.post('/book', auth, async (req, res) => {
       Age: age,
       Sex: sex,
     });
-
+    var flag = 1;
+    let app = await Appointment.findOne({
+      PatientId: patientId,
+      DoctorId: doctorId,
+    });
+    if (app) {
+      flag = 0;
+    }
     await appointment.save();
     console.log('Appointment Booked');
+    if (flag == 1) {
+      var doctorusername, patientusername, patientpassword;
+      await User.findOne({ _id: req.user }).then((data) => {
+        // console.log(data);
+        patientusername = data.Username;
+        patientpassword = data.Password;
+      });
+      await Doctor.findOne({ _id: doctorId }).then((data) => {
+        // console.log(data);
+        doctorusername = data.Username;
+      });
+      console.log(doctorusername, patientusername, patientpassword);
+      var chatid;
+      await axios
+        .post(
+          'https://api.chatengine.io/chats/',
+          {
+            is_direct_chat: true,
+          },
+          {
+            headers: {
+              'Project-ID': process.env.CHAT_ENGINE_PROJECT_ID,
+              'User-Name': patientusername,
+              'User-Secret': patientpassword,
+            },
+          }
+        )
+        .then((res) => {
+          chatid = res.data.id;
+          console.log(res.data.id);
+        })
+        .catch((err) => {
+          console.log('Error in creating chat');
+        });
+      // console.log(chatid);
+      var url = 'https://api.chatengine.io/chats/' + chatid + '/people/';
+      console.log(url);
+      await axios
+        .post(
+          url,
+          {
+            username: doctorusername,
+          },
+          {
+            headers: {
+              'Project-ID': process.env.CHAT_ENGINE_PROJECT_ID,
+              'User-Name': patientusername,
+              'User-Secret': patientpassword,
+            },
+          }
+        )
+        .then((res) => {
+          //  chatid = res.data;
+          // console.log(res);
+          console.log('successfully added doctor to chat');
+        })
+        .catch((err) => {
+          console.log('error in adding doctor to chat');
+        });
+    }
     res.send('Appointment Booked');
   } catch (error) {
     console.log(error);

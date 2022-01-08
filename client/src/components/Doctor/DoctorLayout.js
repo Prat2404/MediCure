@@ -12,6 +12,7 @@ import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Navbar from './DcotorNavbar';
+import ChatIcon from '@mui/icons-material/Chat';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
   return {
@@ -67,6 +68,11 @@ const DoctorLayout = ({ children }) => {
       text: 'Appointments',
       icon: <ListAltIcon color='secondary' />,
       path: '/doctor/appointments',
+    },
+    {
+      text: 'Chat',
+      icon: <ChatIcon color='secondary' />,
+      path: '/doctor/chat',
     },
   ];
   return (

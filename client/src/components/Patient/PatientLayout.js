@@ -13,6 +13,7 @@ import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Navbar from './PatientNavbar';
+import ChatIcon from '@mui/icons-material/Chat';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
   return {
@@ -76,6 +77,11 @@ const PatientLayout = ({ children }) => {
       icon: <ListAltIcon color='secondary' />,
       path: '/patient/appointments',
     },
+    {
+      text: 'Chat',
+      icon: <ChatIcon color='secondary' />,
+      path: '/patient/chat',
+    },
   ];
   return (
     <div className={classes.root}>
@@ -118,7 +124,7 @@ const PatientLayout = ({ children }) => {
         {/* Doctor Appoint and other  */}
         <List>
           <ListItem button>
-            <ListItemText primary='Find Doctors' />
+            <ListItemText primary='Chat' />
           </ListItem>
           <ListItem button>
             <ListItemText primary='Appointment' />

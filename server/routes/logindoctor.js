@@ -46,6 +46,9 @@ router.post(
         user: {
           doctor: flag,
           id: doctor.id,
+          email: doctor.Email,
+          password: doctor.Password,
+          username: doctor.Username,
         },
       };
       jwt.sign(payload, jwtSecret, { expiresIn: 36000 }, (err, token) => {
