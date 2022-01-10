@@ -9,11 +9,12 @@ import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { getAppointDetails } from '../../utils/DoctorActions';
-
+import { sendvideourl } from '../../utils/DoctorActions';
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([
     {
       PatientId: '',
+      PatientUsername: '',
       DoctorName: '',
       DoctorId: {
         _id: new Object(),
@@ -91,6 +92,18 @@ const DoctorAppointments = () => {
                       }}
                     >
                       View
+                    </Button>
+                    <Button
+                      onClick={(e) => {
+                        const random = Math.random().toString(16).substr(2, 14);
+                        sendvideourl(
+                          appointment,
+                          'http://localhost:3001/' + random
+                        );
+                        //  console.log(random);
+                      }}
+                    >
+                      Video Call
                     </Button>
                     <Button>Delete</Button>
                   </TableCell>

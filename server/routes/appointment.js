@@ -27,7 +27,12 @@ router.post('/book', auth, async (req, res) => {
     const sex = req.body.sex;
     const appointMode = timeSlot.status === '0' ? 0 : 1;
     const name = req.body.name;
-
+    var username = '';
+    await User.findOne({ _id: req.user }).then((data) => {
+      //console.log(data);
+      username = data.Username;
+    });
+    console.log(username);
     const appointment = new Appointment({
       PatientId: patientId,
       DoctorId: doctorId,
@@ -41,6 +46,7 @@ router.post('/book', auth, async (req, res) => {
       AppointmentMode: appointMode,
       Age: age,
       Sex: sex,
+      PatientUsername: username,
     });
     var flag = 1;
     let app = await Appointment.findOne({
