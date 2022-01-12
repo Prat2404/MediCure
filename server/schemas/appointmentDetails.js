@@ -12,6 +12,9 @@ const UserSchema = mongoose.Schema({
     ref: 'patient',
     required: true,
   },
+  PatientUsername: {
+    type: String,
+  },
   DoctorName: {
     type: String,
   },
