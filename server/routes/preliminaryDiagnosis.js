@@ -17,7 +17,7 @@ router.post('/check', auth, (req, res) => {
     data.AppointmentId = req.body.AppointmentId;
   }
   var objectId = mongoose.Types.ObjectId(data.AppointmentId);
-  //  console.log(req.body);
+  // console.log('preliminary', req.body);
   preliminaryDiagnosis
     .findOne({ AppointmentId: objectId })
     .then((diag) => {

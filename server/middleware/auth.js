@@ -12,6 +12,7 @@ const verifyToken = (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.jwtSecret);
+    // req.userType = decode
     req.user = decoded.user.id;
     // console.log(decoded);
   } catch (err) {

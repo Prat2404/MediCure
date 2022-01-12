@@ -23,6 +23,7 @@ import PatientProfile from './Patient/PatientProfile';
 import PatientRegister from './Patient/PatientRegister';
 import PatientSearchDoctor from './Patient/PatientSearchDoctor';
 import ChatPage from './chat/chatpage.js';
+import DoctorEditAppointments from './Doctor/DoctorEditAppointments';
 
 const AuthRouter = () => {
   return (
@@ -97,6 +98,11 @@ const AuthRouter = () => {
           exact
           path='/doctor/scheduleTimings'
           component={DoctorScheduleTiming}
+        />
+        <PrivateDoctorRoute
+          exact
+          path='/doctor/appointments/view'
+          component={DoctorEditAppointments}
         />
       </Switch>
     </Router>

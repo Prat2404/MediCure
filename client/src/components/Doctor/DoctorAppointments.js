@@ -92,7 +92,7 @@ const DoctorAppointments = () => {
                     >
                       View
                     </Button>
-                    <Button>Delete</Button>
+                    {/* <Button >Delete</Button> */}
                   </TableCell>
                 </TableRow>
               );

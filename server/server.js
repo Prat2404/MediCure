@@ -22,6 +22,7 @@ const filedown = require('./routes/file_download');
 const auth = require('./middleware/auth');
 const prediagnosis = require('./routes/preliminaryDiagnosis');
 const userdetails = require('./routes/userdetails');
+const daignosis = require('./routes/diagnosis');
 //const filelist = require('./routes/file_list');
 const app = express();
 
@@ -81,3 +82,4 @@ app.use('/doctor/scheduleTimings', doctorTimeSlot);
 app.use('/patient/find-appointment-availability', appointmentAvailability);
 app.use('/patient/appointment', appoinment);
 app.use('/patient/preliminaryDaignosis', prediagnosis);
+app.use('/doctor/diagnosis/', daignosis);

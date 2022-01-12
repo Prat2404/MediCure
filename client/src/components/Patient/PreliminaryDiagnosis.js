@@ -1,5 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
+  CircularProgress,
+  Backdrop,
   Box,
   Button,
   Card,
@@ -225,6 +227,7 @@ const PreliminaryDiagnosis = (props) => {
   const [appointment, setAppointment] = useState(initialAppointmnet);
   const [next4, setNext4] = useState(2);
   const [next6, setNext6] = useState(0);
+  const [open, setOpen] = useState(false);
   const [symptoms, setSymptoms] = useState([
     {
       id: '',
@@ -391,6 +394,7 @@ const PreliminaryDiagnosis = (props) => {
       packet.target = condition.id;
       inferExplain(packet, interviewId).then((res) => {
         console.log(res.data);
+        // setOpen(false);
         explain.push({
           id: condition.id,
           supporting_evidence: res.data.supporting_evidence,
@@ -400,7 +404,7 @@ const PreliminaryDiagnosis = (props) => {
       });
     });
 
-    // console.log(evidence, questions, traige, specialist, explain);
+    console.log(evidence, questions, traige, specialist, explain);
   };
   const handleSubmit = () => {
     const appointmentId = appointment._id;
@@ -455,12 +459,22 @@ const PreliminaryDiagnosis = (props) => {
     // setNext3(5);
     setAppointment(props.appointment);
   }, []);
+  const handleClose = () => {
+    setOpen(false);
+  };
   switch (step) {
     case 1:
       return (
         // <Container>
 
         <Fragment>
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={open}
+            onClick={(e) => handleClose}
+          >
+            <CircularProgress color='inherit' />
+          </Backdrop>
           {/* <Box className={classes.screen}> */}
           <Card sx={{ display: 'flex' }}>
             <Box
